@@ -1,5 +1,7 @@
 import { useFormik } from 'formik';
 import { LoginUI } from './LoginUI';
+import * as Yup from 'yup';
+
 const Login = () => {
   const formik = useFormik({
     initialValues: {
@@ -7,6 +9,15 @@ const Login = () => {
       password: '',
       repeatPassword: '',
     },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email required'),
+      password: Yup.string().required('Password required'),
+      repeatPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Repeat password required'),
+    }),
     onSubmit: values => {
       console.log('submit de logi', values);
     },

@@ -23,6 +23,12 @@ const LoginStyles = styled.div`
   .form-title {
     font-size: 4.5rem;
   }
+
+  .error {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: red;
+  }
 `;
 
 export { LoginStyles };

@@ -15,6 +15,10 @@ const LoginUI = ({ formik }) => {
           placeholder="example@gmail.com"
           name="email"
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className="error">{formik.errors.email}</div>
+        ) : null}
+
         <TextField
           label="Password"
           value={formik.values.password}
@@ -22,6 +26,10 @@ const LoginUI = ({ formik }) => {
           type="password"
           name="password"
         />
+        {formik.touched.password && formik.errors.password ? (
+          <div className="error">{formik.errors.password}</div>
+        ) : null}
+
         <TextField
           label="Repeat Password"
           value={formik.values.repeatPassword}
@@ -29,7 +37,9 @@ const LoginUI = ({ formik }) => {
           type="password"
           name="repeatPassword"
         />
-
+        {formik.touched.repeatPassword && formik.errors.repeatPassword ? (
+          <div className="error">{formik.errors.repeatPassword}</div>
+        ) : null}
         <Button type="submit">Signup</Button>
       </form>
     </LoginStyles>
