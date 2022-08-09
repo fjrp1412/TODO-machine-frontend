@@ -7,7 +7,7 @@ const LoginUI = ({ formik }) => {
   return (
     <LoginStyles>
       <form className="login-form" onSubmit={formik.handleSubmit}>
-        <h1 className="form-title">Signup</h1>
+        <h1 className="form-title">Login</h1>
         <TextField
           label="Email"
           value={formik.values.email}
@@ -30,17 +30,7 @@ const LoginUI = ({ formik }) => {
           <div className="error">{formik.errors.password}</div>
         ) : null}
 
-        <TextField
-          label="Repeat Password"
-          value={formik.values.repeatPassword}
-          handleChange={formik.handleChange}
-          type="password"
-          name="repeatPassword"
-        />
-        {formik.touched.repeatPassword && formik.errors.repeatPassword ? (
-          <div className="error">{formik.errors.repeatPassword}</div>
-        ) : null}
-        <Button type="submit">Signup</Button>
+        <Button type="submit">Login</Button>
       </form>
     </LoginStyles>
   );
