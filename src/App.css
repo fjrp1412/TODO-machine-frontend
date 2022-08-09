@@ -1,8 +1,13 @@
 :root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  --light-gray-bg: #7B7B7B;
+  --hard-gray: #332C2C;
+  --white: #fff;
+  --light-blue: #2EAADC;
+  --purple-select-bg: #2B2479;
+  --black-bg: #202020;
+  --TODO-green: #6FFD00;
+  --TODO-yellow: #FAFF00;
+  --TODO-red: #FF0000;
 }
 
 * {
