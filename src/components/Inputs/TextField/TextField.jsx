@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextFieldStyles } from './TextFieldStyles';
 
-const TextField = ({ label, type, value, handleChange, placeholder }) => {
+const TextField = ({ label, type, value, handleChange, placeholder, name }) => {
   return (
     <TextFieldStyles>
       <div className='input-container'>
@@ -12,6 +12,7 @@ const TextField = ({ label, type, value, handleChange, placeholder }) => {
           value={value}
           onChange={handleChange}
           placeholder={placeholder}
+          name={name}
         />
       </div>
     </TextFieldStyles>
