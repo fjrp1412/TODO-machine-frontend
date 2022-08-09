@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { TextField } from '@components/Inputs/TextField';
-import { LoginStyles } from './LoginStyles';
-
+import { useState } from 'react';
+import { LoginUI } from './LoginUI';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -9,43 +7,32 @@ const Login = () => {
 
   const handleChangeEmail = e => {
     setEmail(e.target.value);
-    console.log(email);
   };
 
   const handleChangePassword = e => {
     setPassword(e.target.value);
-    console.log(password);
   };
 
   const handleChangeRepeatPassword = e => {
     setRepeatPassword(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(email);
+    console.log(password);
     console.log(repeatPassword);
   };
 
   return (
-    <LoginStyles>
-      <form className='login-form'>
-        <h1 className='form-title'>Signup</h1>
-        <TextField
-          label="Email"
-          value={email}
-          handleChange={handleChangeEmail}
-          placeholder="example@gmail.com"
-        />
-        <TextField
-          label="Password"
-          value={password}
-          handleChange={handleChangePassword}
-          type="password"
-        />
-        <TextField
-          label="Repeat Password"
-          value={repeatPassword}
-          handleChange={handleChangeRepeatPassword}
-          type="password"
-        />
-      </form>
-    </LoginStyles>
+    <LoginUI
+      email={email}
+      password={password}
+      repeatPassword={repeatPassword}
+      handleSubmit={handleSubmit}
+      handleChangeEmail={handleChangeEmail}
+      handleChangePassword={handleChangePassword}
+      handleChangeRepeatPassword={handleChangeRepeatPassword}
+    />
   );
 };
 
