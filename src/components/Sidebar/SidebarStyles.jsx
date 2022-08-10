@@ -16,7 +16,7 @@ const SidebarStyles = styled.div`
 
     .sidebar-header {
         width: 90%;
-        height: 75px;
+        height: 90px;
         display: flex;
         align-items: center;
         border-bottom: solid 1px #7B7B7B;
