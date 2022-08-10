@@ -13,6 +13,8 @@ export default defineConfig({
       '@routes': path.resolve(__dirname, './src/routes'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@assets': path.resolve(__dirname, './src/assets'),
+      '@context': path.resolve(__dirname, './src/context'),
+      '@auth': path.resolve(__dirname, './src/auth'),
     },
   },
 });

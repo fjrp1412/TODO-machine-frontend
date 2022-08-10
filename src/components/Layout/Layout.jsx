@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Sidebar } from '@components/Sidebar';
 import { LayoutStyles } from './LayoutStyles';
+import { AppContext } from '@context/AppContext';
 
-const Layout = ({ children, sidebarItems }) => {
+const Layout = ({ children }) => {
+  const { userWorkspaces } = useContext(AppContext);
   return (
     <LayoutStyles>
       <div className="layout">
         <div className="sidebar">
-          <Sidebar items={sidebarItems}></Sidebar>
+          <Sidebar items={userWorkspaces}></Sidebar>
         </div>
 
         <div className="content">{children}</div>
