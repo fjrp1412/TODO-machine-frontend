@@ -17,6 +17,10 @@ const LayoutStyles = styled.div`
     height: 100%;
   }
 
+  .hide {
+    display: none;
+  }
+
   .content {
     display: flex;
     width: 100%;

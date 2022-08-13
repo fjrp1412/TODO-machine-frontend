@@ -68,7 +68,7 @@ const Home = () => {
                 type="button"
                 className="filter-buttons__button"
                 sx={{
-                  width: '110px',
+                  width: '80px',
                   margin: '0px 5px',
                 }}
               >
