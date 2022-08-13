@@ -33,12 +33,34 @@ const HomeStyles = styled.div`
     font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.8);
   }
-
-  .content-sorteable {
-    width: 100%;
-    height: 100px;
-    border: red 1px solid;
+  .content-filter {
+    display: flex;
+    width: 95%;
+    height: 70px;
+    border-radius: 15px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    margin: 0px 0px 10px 0px;
+    background-color: var(--hard-gray);
   }
+
+  .content-filter .filter-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1.4rem;
+  }
+  .content-filter .filter-options .selected {
+    background-color: var(--cyan-select-bg);
+  }
+
+  .content-filter .filter-options .filter-options__option {
+    margin: 0px 10px;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
   .content-TODOs {
     width: 100%;
     height: 100%;
