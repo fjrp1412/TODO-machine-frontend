@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Layout } from '@components/Layout';
 import { Button } from '@components/Button';
 import { HomeStyles } from './HomeStyles';
 
 const Home = () => {
+  const [query, setQuery] = useState({});
+  const handleChangeQuery = field => {
+    setQuery({ ...query, [field]: !query[field] });
+  };
   return (
     <Layout>
       <HomeStyles>
@@ -25,8 +29,38 @@ const Home = () => {
 
           <div className="content-filter">
             <div className="filter-options">
-              <div className="filter-options__option selected">By priority</div>
-              <div className="filter-options__option">By Date</div>
+              <div
+                className={`filter-options__option ${
+                  !!query['low'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('low')}
+              >
+                Low
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['medium'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('medium')}
+              >
+                Medium
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['high'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('high')}
+              >
+                High
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['all'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('all')}
+              >
+                All
+              </div>
             </div>
 
             <div className="filter-buttons">

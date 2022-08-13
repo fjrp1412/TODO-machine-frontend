@@ -48,7 +48,6 @@ const HomeStyles = styled.div`
   .content-filter .filter-options {
     display: flex;
     align-items: center;
-    justify-content: space-around;
     font-size: 1.4rem;
   }
   .content-filter .filter-options .selected {
@@ -56,9 +55,12 @@ const HomeStyles = styled.div`
   }
 
   .content-filter .filter-options .filter-options__option {
-    margin: 0px 10px;
-    padding: 10px;
+    margin: 0px 3px;
+    padding: 10px 0px;
     border-radius: 25px;
+    width: 75px;
+    text-align: center;
+    cursor: pointer;
   }
 
   .content-TODOs {
