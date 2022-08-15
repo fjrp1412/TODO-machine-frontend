@@ -123,10 +123,12 @@ const HomeStyles = styled.div`
   }
 
   .TODOs-container__list {
-    display: flex;
     width: 100%;
     height: 100%;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2px;
   }
 
   .TODOs-list__item {
