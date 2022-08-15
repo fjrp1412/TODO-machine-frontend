@@ -14,7 +14,7 @@ const HomeStyles = styled.div`
   .content-info {
     width: 100%;
     display: flex;
-    height: 300px;
+    height: 200px;
     margin-top: 50px;
   }
 
@@ -66,7 +66,71 @@ const HomeStyles = styled.div`
   .content-TODOs {
     width: 100%;
     height: 100%;
-    border: red 1px solid;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .TODOs-container {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 580px;
+    margin: 20px;
+    border-radius: 25px;
+
+    @media screen and (max-width: 1355) {
+      width: 260px;
+    }
+  }
+
+  .TODOs-container__head {
+    width: 100%;
+    font-size: 2.2rem;
+    font-weight: bolder;
+    text-align: center;
+    padding: 5px;
+    border-radius: 25px 25px 0px 0px;
+  }
+
+  .content-TODOs .finish {
+    border: solid 2px #6ffd00;
+  }
+
+  .finish .TODOs-container__head {
+    background-color: var(--TODO-green);
+  }
+
+  .content-TODOs .doing {
+    border: solid 2px #faff00;
+  }
+
+  .doing .TODOs-container__head {
+    background-color: var(--TODO-yellow);
+  }
+
+  .content-TODOs .pending {
+    border: solid 2px #ff0000;
+  }
+
+  .pending .TODOs-container__head {
+    background-color: var(--TODO-red);
+  }
+
+  .TODOs-container__list {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .TODOs-list__item {
+    width: 100%;
+    height: 100px;
+    margin: 10px 0;
+    border: solid 1px blue;
   }
 `;
 

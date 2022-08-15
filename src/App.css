@@ -1,6 +1,6 @@
 @import url('https://rsms.me/inter/inter.css');
 :root {
-  --light-gray-bg: #3A3A3A;
+  --light-gray-bg: #3a3a3a;
   --hard-gray: #332c2c;
   --white: #fff;
   --light-blue: #2eaadc;
@@ -8,9 +8,9 @@
   --cyan-select-bg: #007d8a;
   --black-bg: #191919;
   --black-variant: #202020;
-  --TODO-green: #6ffd00;
-  --TODO-yellow: #faff00;
-  --TODO-red: #ff0000;
+  --TODO-green: #287e09;
+  --TODO-yellow: #8a8d00;
+  --TODO-red: #7e0909;
 }
 
 body {
@@ -21,8 +21,8 @@ body {
 html {
   font-size: 62.5%;
   width: 100%;
-  height: 100%;
   font-family: 'Inter';
+  height: 100%;
 }
 
 #root {

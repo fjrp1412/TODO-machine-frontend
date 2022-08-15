@@ -14,7 +14,6 @@ const LayoutStyles = styled.div`
 
   .sidebar {
     width: 250px;
-    height: 100%;
   }
 
   .hide {

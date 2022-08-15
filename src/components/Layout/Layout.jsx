@@ -16,7 +16,9 @@ const Layout = ({ children }) => {
           <Sidebar items={userWorkspaces}></Sidebar>
         </div>
 
-        <div className="content">{children}</div>
+        <div className="content">
+          {children}
+        </div>
       </div>
     </LayoutStyles>
   );

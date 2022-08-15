@@ -77,7 +77,35 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="content-TODOs"></div>
+          <div className="content-TODOs">
+            <div className="TODOs-container pending">
+              <div className="TODOs-container__head">Pending</div>
+
+              <div className="TODOs-container__list">
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+              </div>
+            </div>
+            <div className="TODOs-container doing">
+              <div className="TODOs-container__head">Doing</div>
+
+              <div className="TODOs-container__list">
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+              </div>
+            </div>
+            <div className="TODOs-container finish">
+              <div className="TODOs-container__head">Finished</div>
+
+              <div className="TODOs-container__list">
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+                <div className="TODOs-list__item"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </HomeStyles>
     </Layout>
