@@ -79,9 +79,8 @@ const HomeStyles = styled.div`
     height: 580px;
     margin: 20px;
     border-radius: 25px;
-
-    @media screen and (max-width: 1355) {
-      width: 260px;
+    @media only screen and (max-width: 970px) {
+      width: 100%;
     }
   }
 
