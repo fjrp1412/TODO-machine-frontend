@@ -75,7 +75,7 @@ const HomeStyles = styled.div`
   .TODOs-container {
     display: flex;
     flex-direction: column;
-    width: 320px;
+    width: 420px;
     height: 580px;
     margin: 20px;
     border-radius: 25px;
@@ -122,7 +122,6 @@ const HomeStyles = styled.div`
     width: 100%;
     height: 100%;
     flex-direction: column;
-    justify-content: space-around;
   }
 
   .TODOs-list__item {

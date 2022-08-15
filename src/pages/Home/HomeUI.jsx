@@ -1,9 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '@components/Layout';
 import { Button } from '@components/Button';
+import { TODO } from '@components/TODO';
 import { HomeStyles } from './HomeStyles';
 
-const HomeUI = ({ query, handleChangeQuery}) => {
+const HomeUI = ({ query, handleChangeQuery }) => {
+  const TODOItemsTest = [
+    {
+      id: 1,
+      title: 'Todo 1',
+      priority: 'Low',
+      status: 'pending',
+    },
+    {
+      id: 2,
+      title: 'Todo 2',
+      priority: 'Low',
+      status: 'pending',
+    },
+    {
+      id: 3,
+      title: 'Todo 3',
+      priority: 'Medium',
+      status: 'doing',
+    },
+    {
+      id: 4,
+      title: 'Todo 4',
+      priority: 'Medium',
+      status: 'doing',
+    },
+    {
+      id: 5,
+      title: 'Todo 5',
+      priority: 'High',
+      status: 'finished',
+    },
+    {
+      id: 6,
+      title: 'Todo 6',
+      priority: 'High',
+      status: 'finished',
+    },
+  ];
+  const [pendings, setPendings] = useState([]);
+  const [doings, setDoings] = useState([]);
+  const [finisheds, setFinisheds] = useState([]);
+
+  const [TODOItems, setTODOItems] = useState(TODOItemsTest);
+
+  useEffect(() => {
+    setPendings(
+      TODOItems.filter(item => item.status.toLowerCase() === 'pending')
+    );
+    setDoings(TODOItems.filter(item => item.status.toLowerCase() === 'doing'));
+    setFinisheds(
+      TODOItems.filter(item => item.status.toLowerCase() === 'finished')
+    );
+  }, [TODOItems]);
+
   return (
     <Layout>
       <HomeStyles>
@@ -75,29 +130,45 @@ const HomeUI = ({ query, handleChangeQuery}) => {
           <div className="content-TODOs">
             <div className="TODOs-container pending">
               <div className="TODOs-container__head">Pending</div>
-
               <div className="TODOs-container__list">
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
+                {pendings &&
+                  pendings?.map(item => (
+                    <TODO
+                      key={item.id}
+                      title={item.title}
+                      priority={item.priority}
+                    ></TODO>
+                  ))}
               </div>
             </div>
+
             <div className="TODOs-container doing">
               <div className="TODOs-container__head">Doing</div>
 
               <div className="TODOs-container__list">
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
+                {doings &&
+                  doings?.map(item => (
+                    <TODO
+                      key={item.id}
+                      title={item.title}
+                      priority={item.priority}
+                    ></TODO>
+                  ))}
               </div>
             </div>
+
             <div className="TODOs-container finish">
               <div className="TODOs-container__head">Finished</div>
 
               <div className="TODOs-container__list">
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
-                <div className="TODOs-list__item"></div>
+                {finisheds &&
+                  finisheds?.map(item => (
+                    <TODO
+                      key={item.id}
+                      title={item.title}
+                      priority={item.priority}
+                    ></TODO>
+                  ))}
               </div>
             </div>
           </div>
