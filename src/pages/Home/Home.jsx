@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { HomeUI } from './HomeUI';
 
 const Home = () => {
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState({
+    low: false,
+    medium: false,
+    high: false,
+    all: true,
+  });
   const TODOItemsTest = [
     {
       id: 1,
@@ -52,16 +57,47 @@ const Home = () => {
   const [finisheds, setFinisheds] = useState([]);
 
   const [TODOItems, setTODOItems] = useState(TODOItemsTest);
+  const [filteredTOODs, setFilteredTODOs] = useState();
+
+  useEffect(() => {
+    setFilteredTODOs(TODOItems);
+  }, [TODOItems]);
 
   useEffect(() => {
     setPendings(
-      TODOItems.filter(item => item.status.toLowerCase() === 'pending')
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
     );
-    setDoings(TODOItems.filter(item => item.status.toLowerCase() === 'doing'));
+    setDoings(
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'doing')
+    );
     setFinisheds(
-      TODOItems.filter(item => item.status.toLowerCase() === 'finished')
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'finished')
     );
-  }, [TODOItems]);
+  }, [filteredTOODs]);
+
+  useEffect(() => {
+    let auxFiltered = [...TODOItems];
+    if (query['all']) {
+      setFilteredTODOs(TODOItems);
+      return;
+    }
+
+    if (!query['low'] && !query['medium'] && !query['high'] && !query['all']) {
+      setQuery({ ...query, all: true });
+      setFilteredTODOs(TODOItems);
+      return;
+    }
+
+    for (const property in query) {
+      if (!query[property]) {
+        auxFiltered = auxFiltered.filter(
+          item => item.priority.toLowerCase() !== property
+        );
+      }
+    }
+
+    setFilteredTODOs(auxFiltered);
+  }, [query]);
 
   const handleChangeQuery = field => {
     setQuery({ ...query, [field]: !query[field] });
