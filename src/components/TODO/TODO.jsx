@@ -1,7 +1,7 @@
 import React from 'react';
 import { TODOStyles } from './TODOStyles';
 
-const TODO = ({ title, priority }) => {
+const TODO = ({ title, priority, handleRemove }) => {
   return (
     <TODOStyles>
       <div className="TODO-title">{title}</div>
@@ -9,7 +9,10 @@ const TODO = ({ title, priority }) => {
       <div className="TODO-priority">{priority}</div>
 
       <div className="TODO-options">
-        <span className="TODO-options__option remove"></span>
+        <span
+          className="TODO-options__option remove"
+          onClick={handleRemove}
+        ></span>
         <span className="TODO-options__option check"></span>
       </div>
     </TODOStyles>

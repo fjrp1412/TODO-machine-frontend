@@ -75,10 +75,15 @@ const HomeStyles = styled.div`
   .TODOs-container {
     display: flex;
     flex-direction: column;
-    width: 420px;
-    height: 580px;
+    width: 400px;
+    height: 607px;
     margin: 20px;
     border-radius: 25px;
+
+    @media only screen and (max-width: 1600px) {
+      width: 320px;
+    }
+
     @media only screen and (max-width: 970px) {
       width: 100%;
     }

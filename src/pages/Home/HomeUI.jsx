@@ -4,61 +4,14 @@ import { Button } from '@components/Button';
 import { TODO } from '@components/TODO';
 import { HomeStyles } from './HomeStyles';
 
-const HomeUI = ({ query, handleChangeQuery }) => {
-  const TODOItemsTest = [
-    {
-      id: 1,
-      title: 'Todo 1',
-      priority: 'Low',
-      status: 'pending',
-    },
-    {
-      id: 2,
-      title: 'Todo 2',
-      priority: 'Low',
-      status: 'pending',
-    },
-    {
-      id: 3,
-      title: 'Todo 3',
-      priority: 'Medium',
-      status: 'doing',
-    },
-    {
-      id: 4,
-      title: 'Todo 4',
-      priority: 'Medium',
-      status: 'doing',
-    },
-    {
-      id: 5,
-      title: 'Todo 5',
-      priority: 'High',
-      status: 'finished',
-    },
-    {
-      id: 6,
-      title: 'Todo 6',
-      priority: 'High',
-      status: 'finished',
-    },
-  ];
-  const [pendings, setPendings] = useState([]);
-  const [doings, setDoings] = useState([]);
-  const [finisheds, setFinisheds] = useState([]);
-
-  const [TODOItems, setTODOItems] = useState(TODOItemsTest);
-
-  useEffect(() => {
-    setPendings(
-      TODOItems.filter(item => item.status.toLowerCase() === 'pending')
-    );
-    setDoings(TODOItems.filter(item => item.status.toLowerCase() === 'doing'));
-    setFinisheds(
-      TODOItems.filter(item => item.status.toLowerCase() === 'finished')
-    );
-  }, [TODOItems]);
-
+const HomeUI = ({
+  query,
+  handleChangeQuery,
+  pendings,
+  doings,
+  finisheds,
+  handleRemoveItem,
+}) => {
   return (
     <Layout>
       <HomeStyles>
@@ -137,6 +90,7 @@ const HomeUI = ({ query, handleChangeQuery }) => {
                       key={item.id}
                       title={item.title}
                       priority={item.priority}
+                      handleRemove={() => handleRemoveItem(item.id)}
                     ></TODO>
                   ))}
               </div>
@@ -152,6 +106,7 @@ const HomeUI = ({ query, handleChangeQuery }) => {
                       key={item.id}
                       title={item.title}
                       priority={item.priority}
+                      handleRemove={() => handleRemoveItem(item.id)}
                     ></TODO>
                   ))}
               </div>
@@ -167,6 +122,7 @@ const HomeUI = ({ query, handleChangeQuery }) => {
                       key={item.id}
                       title={item.title}
                       priority={item.priority}
+                      handleRemove={() => handleRemoveItem(item.id)}
                     ></TODO>
                   ))}
               </div>
