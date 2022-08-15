@@ -9,36 +9,42 @@ const Home = () => {
       title: 'Todo 1',
       priority: 'Low',
       status: 'pending',
+      completed: false,
     },
     {
       id: 2,
       title: 'Todo 2',
       priority: 'Low',
       status: 'pending',
+      completed: false,
     },
     {
       id: 3,
       title: 'Todo 3',
       priority: 'Medium',
       status: 'doing',
+      completed: false,
     },
     {
       id: 4,
       title: 'Todo 4',
       priority: 'Medium',
       status: 'doing',
+      completed: false,
     },
     {
       id: 5,
       title: 'Todo 5',
       priority: 'High',
       status: 'finished',
+      completed: true,
     },
     {
       id: 6,
       title: 'Todo 6',
       priority: 'High',
       status: 'finished',
+      completed: true,
     },
   ];
   const [pendings, setPendings] = useState([]);
@@ -62,9 +68,34 @@ const Home = () => {
   };
 
   const handleRemoveItem = id => {
-    console.log(id);
     setTODOItems(previous => previous.filter(item => item.id !== id));
   };
+
+  const handleToggleCompleted = id => {
+    setTODOItems(
+      TODOItems.map(item => {
+        if (item.id === id) {
+          item.completed = !item.completed;
+
+          if (item.completed && item.status === 'pending') {
+            item.status = 'finished';
+            console.log('item post modificarse pending', item);
+            return item;
+          }
+          if (item.completed && item.status === 'doing') {
+            item.status = 'finished';
+            console.log('item post modificarse doing', item);
+            return item;
+          }
+
+          item.status = 'pending';
+        }
+
+        return item;
+      })
+    );
+  };
+
   return (
     <HomeUI
       query={query}
@@ -73,6 +104,7 @@ const Home = () => {
       doings={doings}
       finisheds={finisheds}
       handleRemoveItem={handleRemoveItem}
+      handleToggleCompleted={handleToggleCompleted}
     />
   );
 };

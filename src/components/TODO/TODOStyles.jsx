@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CheckWhite from '@assets/check-white.png';
+import CheckGreen from '@assets/check-green.png';
 import Delete from '@assets/delete.png';
 
 const TODOStyles = styled.div`
@@ -37,6 +38,11 @@ const TODOStyles = styled.div`
 
   .check {
     background-image: url(${CheckWhite});
+  }
+
+  .green-check {
+    background-image: url(${CheckGreen})
+
   }
 
   .remove {

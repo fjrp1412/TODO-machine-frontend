@@ -1,7 +1,13 @@
 import React from 'react';
 import { TODOStyles } from './TODOStyles';
 
-const TODO = ({ title, priority, handleRemove }) => {
+const TODO = ({
+  title,
+  priority,
+  handleRemove,
+  handleToggleCompleted,
+  finished,
+}) => {
   return (
     <TODOStyles>
       <div className="TODO-title">{title}</div>
@@ -13,7 +19,12 @@ const TODO = ({ title, priority, handleRemove }) => {
           className="TODO-options__option remove"
           onClick={handleRemove}
         ></span>
-        <span className="TODO-options__option check"></span>
+        <span
+          className={`TODO-options__option ${
+            finished ? 'green-check' : 'check'
+          } `}
+          onClick={handleToggleCompleted}
+        ></span>
       </div>
     </TODOStyles>
   );

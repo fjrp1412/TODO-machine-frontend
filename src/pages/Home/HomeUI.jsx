@@ -11,6 +11,7 @@ const HomeUI = ({
   doings,
   finisheds,
   handleRemoveItem,
+  handleToggleCompleted,
 }) => {
   return (
     <Layout>
@@ -91,6 +92,9 @@ const HomeUI = ({
                       title={item.title}
                       priority={item.priority}
                       handleRemove={() => handleRemoveItem(item.id)}
+                      handleToggleCompleted={() =>
+                        handleToggleCompleted(item.id)
+                      }
                     ></TODO>
                   ))}
               </div>
@@ -107,6 +111,9 @@ const HomeUI = ({
                       title={item.title}
                       priority={item.priority}
                       handleRemove={() => handleRemoveItem(item.id)}
+                      handleToggleCompleted={() =>
+                        handleToggleCompleted(item.id)
+                      }
                     ></TODO>
                   ))}
               </div>
@@ -123,6 +130,10 @@ const HomeUI = ({
                       title={item.title}
                       priority={item.priority}
                       handleRemove={() => handleRemoveItem(item.id)}
+                      handleToggleCompleted={() =>
+                        handleToggleCompleted(item.id)
+                      }
+                      finished
                     ></TODO>
                   ))}
               </div>
