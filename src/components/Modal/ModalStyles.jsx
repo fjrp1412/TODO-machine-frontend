@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ModalStyles = styled.div`
   background-color: var(--black-bg);
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
