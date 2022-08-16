@@ -1,21 +1,17 @@
 import React from 'react';
 import { TextFieldStyles } from './TextFieldStyles';
 
-const TextField = ({ label, type, value, handleChange, placeholder, name }) => {
+const TextField = ({ type, value, handleChange, placeholder, name, sx }) => {
   return (
-    <TextFieldStyles>
-      <div className='input-container'>
-        <label className="input-label"> {label} </label>
-        <input
-          className="input"
-          type={type || "text"}
-          value={value}
-          onChange={handleChange}
-          placeholder={placeholder}
-          name={name}
-        />
-      </div>
-    </TextFieldStyles>
+    <TextFieldStyles
+      className="input"
+      type={type || 'text'}
+      value={value}
+      onChange={handleChange}
+      placeholder={placeholder}
+      name={name}
+      {...sx}
+    ></TextFieldStyles>
   );
 };
 

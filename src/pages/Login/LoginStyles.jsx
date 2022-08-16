@@ -20,6 +20,15 @@ const LoginStyles = styled.div`
     border-radius: 15px;
   }
 
+  .input-container {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0px;
+    padding: 0px 5px;
+  }
+
   .form-title {
     font-size: 4.5rem;
   }
