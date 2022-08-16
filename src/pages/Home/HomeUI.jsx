@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { Button } from '@components/Button';
 import { TODO } from '@components/TODO';
+import { Modal } from '@components/Modal';
 import { HomeStyles } from './HomeStyles';
 
 const HomeUI = ({
@@ -11,6 +11,9 @@ const HomeUI = ({
   finisheds,
   handleRemoveItem,
   handleToggleCompleted,
+  open,
+  onOpenModal,
+  onCloseModal,
 }) => {
   return (
     <HomeStyles>
@@ -69,6 +72,7 @@ const HomeUI = ({
             <Button
               type="button"
               className="filter-buttons__button"
+              handleClick={onOpenModal}
               sx={{
                 width: '80px',
                 margin: '0px 5px',
@@ -132,6 +136,8 @@ const HomeUI = ({
           </div>
         </div>
       </div>
+      <Modal open={open} onClose={onCloseModal}>
+      </Modal>
     </HomeStyles>
   );
 };

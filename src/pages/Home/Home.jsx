@@ -58,6 +58,7 @@ const Home = () => {
 
   const [TODOItems, setTODOItems] = useState(TODOItemsTest);
   const [filteredTOODs, setFilteredTODOs] = useState();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setFilteredTODOs(TODOItems);
@@ -131,6 +132,9 @@ const Home = () => {
       finisheds={finisheds}
       handleRemoveItem={handleRemoveItem}
       handleToggleCompleted={handleToggleCompleted}
+      open={open}
+      onOpenModal={() => setOpen(true)}
+      onCloseModal={() => setOpen(false)}
     />
   );
 };
