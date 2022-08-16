@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login, Signup, Home } from '@pages';
+import { Layout } from '@components/Layout';
 import { AppProvider } from '@context';
 import { UserAuthWrapper } from '@auth/UserAuthWrapper.jsx';
 import '@/App.css';
@@ -13,7 +14,9 @@ function App() {
             path="/"
             element={
               <UserAuthWrapper>
-                <Home />
+                <Layout>
+                  <Home />
+                </Layout>
               </UserAuthWrapper>
             }
           ></Route>
