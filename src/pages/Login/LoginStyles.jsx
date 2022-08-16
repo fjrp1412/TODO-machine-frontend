@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const LoginStyles = styled.div`
   display: flex;
   width: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  height: 100%;
   color: white;
   background-color: var(--light-gray-bg);
 

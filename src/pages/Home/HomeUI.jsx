@@ -1,7 +1,8 @@
 import { Button } from '@components/Button';
 import { TODO } from '@components/TODO';
 import { Modal } from '@components/Modal';
-import { HomeStyles } from './HomeStyles';
+import { TextField } from '@components/Inputs/TextField';
+import { HomeStyles, FormStyle } from './HomeStyles';
 
 const HomeUI = ({
   query,
@@ -137,6 +138,43 @@ const HomeUI = ({
         </div>
       </div>
       <Modal open={open} onClose={onCloseModal}>
+        <FormStyle>
+          <div className="form-container">
+            <div className="form-title-container">
+              <h1 className="form-title">Create new TODO</h1>
+            </div>
+            <div className="form-todo-title field">
+              <TextField label="title" name="title" />
+            </div>
+
+            <div className="form-todo-completed field">
+              <TextField label="Completed" type="checkbox" name="completed" />
+            </div>
+
+            <div className="form-todo-priority field">
+              <TextField label="Priority" type="text" name="priority" />
+            </div>
+
+            <div className="form-todo-priority field">
+              <TextField label="Description" type="text" name="description" />
+            </div>
+
+            <div className="form-container__buttons">
+              <Button
+                sx={{
+                  margin: '10px',
+                }}
+              >
+                Create new TODO
+              </Button>
+              <Button 
+              sx={{
+                backgroundColor: 'var(--TODO-red)'
+              }}
+              >Cancel</Button>
+            </div>
+          </div>
+        </FormStyle>
       </Modal>
     </HomeStyles>
   );

@@ -5,7 +5,7 @@ const SignupStyles = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 100vh;
   color: white;
   background-color: var(--light-gray-bg);
 

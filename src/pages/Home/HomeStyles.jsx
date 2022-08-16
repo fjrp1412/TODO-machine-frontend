@@ -139,4 +139,33 @@ const HomeStyles = styled.div`
   }
 `;
 
-export { HomeStyles };
+const FormStyle = styled.form`
+  height: 100%;
+  width: 100%;
+
+  .form-title {
+    color: white;
+    text-align: center;
+    font-size: 2.4rem;
+  }
+
+  .form-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-container .field {
+    width: 80%;
+  }
+
+  .form-container__buttons {
+    margin-top: 20px;
+  }
+
+`;
+
+export { HomeStyles, FormStyle };
