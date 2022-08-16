@@ -113,18 +113,8 @@ const Home = () => {
         if (item.id === id) {
           item.completed = !item.completed;
 
-          if (item.completed && item.status === 'pending') {
-            item.status = 'finished';
-            console.log('item post modificarse pending', item);
-            return item;
-          }
-          if (item.completed && item.status === 'doing') {
-            item.status = 'finished';
-            console.log('item post modificarse doing', item);
-            return item;
-          }
-
-          item.status = 'pending';
+          item.status = item.completed ? 'finished' : 'pending';
+          return item;
         }
 
         return item;
