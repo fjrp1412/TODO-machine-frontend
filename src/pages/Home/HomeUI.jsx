@@ -2,6 +2,7 @@ import { Button } from '@components/Button';
 import { TODO } from '@components/TODO';
 import { Modal } from '@components/Modal';
 import { TextField } from '@components/Inputs/TextField';
+import { TextArea } from '@components/Inputs/TextArea';
 import { HomeStyles, FormStyle } from './HomeStyles';
 
 const HomeUI = ({
@@ -140,19 +141,21 @@ const HomeUI = ({
       <Modal open={open} onClose={onCloseModal}>
         <FormStyle>
           <div className="form-container">
-            <div className="form-title-container">
-              <h1 className="form-title">Create new TODO</h1>
-            </div>
-            <div className="form-todo-title field">
-              <TextField label="title" name="title" />
-            </div>
+            <div className="form-container__head">
+              <div className="form-todo-title field">
+                <TextArea
+                  value="Un titulo con mucho texto"
+                  handleChange={e => console.log(e.target.value)}
+                ></TextArea>
+              </div>
 
-            <div className="form-todo-completed field">
-              <TextField label="Completed" type="checkbox" name="completed" />
-            </div>
+              <div className="form-todo-completed field">
+                <TextField label="Completed" type="checkbox" name="completed" />
+              </div>
 
-            <div className="form-todo-priority field">
-              <TextField label="Priority" type="text" name="priority" />
+              <div className="form-todo-priority field">
+                <TextField label="Priority" type="text" name="priority" />
+              </div>
             </div>
 
             <div className="form-todo-priority field">
@@ -167,11 +170,13 @@ const HomeUI = ({
               >
                 Create new TODO
               </Button>
-              <Button 
-              sx={{
-                backgroundColor: 'var(--TODO-red)'
-              }}
-              >Cancel</Button>
+              <Button
+                sx={{
+                  backgroundColor: 'var(--TODO-red)',
+                }}
+              >
+                Cancel
+              </Button>
             </div>
           </div>
         </FormStyle>

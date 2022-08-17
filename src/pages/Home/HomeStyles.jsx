@@ -142,29 +142,34 @@ const HomeStyles = styled.div`
 const FormStyle = styled.form`
   height: 100%;
   width: 100%;
-
-  .form-title {
-    color: white;
-    text-align: center;
-    font-size: 2.4rem;
-  }
+  padding: 50px;
 
   .form-container {
     display: flex;
     width: 100%;
     height: 100%;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  }
+
+  .form-container__head {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    height: 200px;
+    border-bottom: solid 1px #7B7B7B;
+    padding-bottom: 20px;
   }
 
   .form-container .field {
-    width: 80%;
+    width: 100%;
   }
 
   .form-container__buttons {
     margin-top: 20px;
   }
+
 
 `;
 
