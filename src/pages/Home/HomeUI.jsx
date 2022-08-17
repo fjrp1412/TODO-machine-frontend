@@ -4,6 +4,7 @@ import { Modal } from '@components/Modal';
 import { TextField } from '@components/Inputs/TextField';
 import { TextArea } from '@components/Inputs/TextArea';
 import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
+import { SimpleSelect } from '@components/Inputs/Selects';
 import { Label } from '@components/Label';
 import { HomeStyles, FormStyle } from './HomeStyles';
 
@@ -151,14 +152,16 @@ const HomeUI = ({
                 ></TextArea>
               </div>
 
-              <div className="form-todo-completed field">
+              <div className="form-todo__completed field">
                 <Label
-                sx={{
-                  margin: '0px 10px 0px 0px',
-                  color: 'rgba(255, 255, 255, .7)',
-                  fontSize: '1.8rem'
-                }}
-                >Completed</Label>
+                  sx={{
+                    margin: '0px 10px 0px 0px',
+                    color: 'rgba(255, 255, 255, .7)',
+                    fontSize: '1.8rem',
+                  }}
+                >
+                  Completed
+                </Label>
                 <CheckBox
                   value={true}
                   handleChange={e => console.log(e.target.value)}
@@ -167,30 +170,24 @@ const HomeUI = ({
                 />
               </div>
 
-              <div className="form-todo-priority field">
-                <TextField label="Priority" type="text" name="priority" />
+              <div className="form-todo__priority field">
+                <SimpleSelect />
               </div>
             </div>
 
-            <div className="form-todo-priority field">
-              <TextField label="Description" type="text" name="description" />
-            </div>
-
-            <div className="form-container__buttons">
-              <Button
+            <div className="form-todo__description field">
+              <TextArea
+                name="description"
+                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Duis vel nisi a felis aliquet suscipit.
+                Suspendisse tincidunt, erat at tempus elementum,
+                nulla magna posuere tellus, eget maximus quam urna facilisis tellus. Donec consequat quis nisl eget aliquet. Nulla aliquam, justo a tincidunt vulputate, nisi neque varius urna, ut venenatis mi ante ut sapien. Cras placerat lorem vel nunc mollis luctus vel vitae lacus. Aenean elementum porttitor erat. Sed a quam vitae felis gravida posuere at at libero. Morbi sit amet massa velit. Donec imperdiet sed magna vel tincidunt. Pellentesque bibendum fermentum convallis."
+                handleChange={e => console.log(e.target.value)}
                 sx={{
-                  margin: '10px',
+                  height: '100%',
+                  fontSize: '1.6rem',
                 }}
-              >
-                Create new TODO
-              </Button>
-              <Button
-                sx={{
-                  backgroundColor: 'var(--TODO-red)',
-                }}
-              >
-                Cancel
-              </Button>
+              />
             </div>
           </div>
         </FormStyle>

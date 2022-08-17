@@ -166,8 +166,16 @@ const FormStyle = styled.form`
     width: 100%;
   }
 
-  .form-container__buttons {
-    margin-top: 20px;
+  .form-container .form-todo__completed {
+    margin-bottom: 15px;
+  }
+
+  .form-container .form-todo__description {
+    height: 100%;
+  }
+
+  .form-container .form-todo__priority {
+    width: 50%;
   }
 
 
