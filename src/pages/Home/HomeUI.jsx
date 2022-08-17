@@ -3,6 +3,8 @@ import { TODO } from '@components/TODO';
 import { Modal } from '@components/Modal';
 import { TextField } from '@components/Inputs/TextField';
 import { TextArea } from '@components/Inputs/TextArea';
+import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
+import { Label } from '@components/Label';
 import { HomeStyles, FormStyle } from './HomeStyles';
 
 const HomeUI = ({
@@ -150,7 +152,19 @@ const HomeUI = ({
               </div>
 
               <div className="form-todo-completed field">
-                <TextField label="Completed" type="checkbox" name="completed" />
+                <Label
+                sx={{
+                  margin: '0px 10px 0px 0px',
+                  color: 'rgba(255, 255, 255, .7)',
+                  fontSize: '1.8rem'
+                }}
+                >Completed</Label>
+                <CheckBox
+                  value={true}
+                  handleChange={e => console.log(e.target.value)}
+                  name="completed"
+                  checked={true}
+                />
               </div>
 
               <div className="form-todo-priority field">
