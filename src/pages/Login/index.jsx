@@ -52,4 +52,4 @@ const Login = () => {
   return <LoginUI formik={formik} />;
 };
 
-export { Login };
+export default Login;

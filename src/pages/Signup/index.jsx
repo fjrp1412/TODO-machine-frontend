@@ -26,4 +26,4 @@ const Signup = () => {
   return <SignupUI formik={formik} />;
 };
 
-export { Signup };
+export default Signup;
