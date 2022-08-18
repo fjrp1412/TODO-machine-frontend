@@ -8,6 +8,7 @@ import '@/App.css';
 const Home = lazy(() => import('@pages/Home'));
 const Login = lazy(() => import('@pages/Login'));
 const Signup = lazy(() => import('@pages/Signup'));
+const Detail = lazy(() => import('@pages/Detail'));
 
 function App() {
   return (
@@ -40,6 +41,18 @@ function App() {
               <Suspense fallback={<div>Loading</div>}>
                 <Signup />
               </Suspense>
+            }
+          ></Route>
+          <Route
+            path="/:id"
+            element={
+              <UserAuthWrapper>
+                <Layout>
+                  <Suspense fallback={<div>Loading</div>}>
+                    <Detail />
+                  </Suspense>
+                </Layout>
+              </UserAuthWrapper>
             }
           ></Route>
         </Routes>

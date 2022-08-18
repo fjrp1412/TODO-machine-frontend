@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 const LayoutStyles = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: var(--black-bg);
   color: white;
 
   .layout {
     display: flex;
     width: 100%;
+    height: 100%;
   }
 
   .sidebar {
