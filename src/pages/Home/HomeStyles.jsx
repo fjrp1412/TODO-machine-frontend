@@ -89,6 +89,7 @@ const HomeStyles = styled.div`
     }
   }
 
+
   .TODOs-container__head {
     width: 100%;
     font-size: 2.2rem;
@@ -130,6 +131,11 @@ const HomeStyles = styled.div`
     overflow-x: hidden;
     padding: 2px;
   }
+  
+  .TODOs-container__list .link{
+    color: white;
+    text-decoration: none;
+  }
 
   .TODOs-list__item {
     width: 100%;
@@ -139,46 +145,5 @@ const HomeStyles = styled.div`
   }
 `;
 
-const FormStyle = styled.form`
-  height: 100%;
-  width: 100%;
-  padding: 50px;
 
-  .form-container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-  }
-
-  .form-container__head {
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 80%;
-    height: 200px;
-    border-bottom: solid 1px #7B7B7B;
-    padding-bottom: 20px;
-  }
-
-  .form-container .field {
-    width: 100%;
-  }
-
-  .form-container .form-todo__completed {
-    margin-bottom: 15px;
-  }
-
-  .form-container .form-todo__description {
-    height: 100%;
-  }
-
-  .form-container .form-todo__priority {
-    width: 50%;
-  }
-
-
-`;
-
-export { HomeStyles, FormStyle };
+export { HomeStyles };

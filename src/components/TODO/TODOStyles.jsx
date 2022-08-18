@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import CheckWhite from '@assets/check-white.png';
 import CheckGreen from '@assets/check-green.png';
 import Delete from '@assets/delete.png';
+import OpenArrow from '@assets/open-diagonal-arrow.png';
 
 const TODOStyles = styled.div`
   display: flex;
@@ -13,9 +14,26 @@ const TODOStyles = styled.div`
   padding: 0px 10px;
   background-color: #202020;
 
+  .TODO-container__head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   .TODO-title {
     font-size: 1.6rem;
   }
+
+  .TODO-arrow {
+    background-image: url(${OpenArrow});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+
 
   .TODO-priority {
     font-size: 1.4rem;
@@ -36,13 +54,13 @@ const TODOStyles = styled.div`
     cursor: pointer;
   }
 
+
   .check {
     background-image: url(${CheckWhite});
   }
 
   .green-check {
-    background-image: url(${CheckGreen})
-
+    background-image: url(${CheckGreen});
   }
 
   .remove {

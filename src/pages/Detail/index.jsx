@@ -1,18 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { DetailStyles } from './DetailStyles';
 import { TextArea } from '@components/Inputs/TextArea';
 import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
 import { SimpleSelect } from '@components/Inputs/Selects';
 import { Label } from '@components/Label';
 
-const TODODetail = ({ TODO = null }) => {
+const TODODetail = () => {
+  const { id } = useParams();
+  const TODOItemsTest = [
+    {
+      id: 1,
+      title: 'Todo 1',
+      priority: 'Low',
+      status: 'pending',
+      completed: false,
+    },
+    {
+      id: 2,
+      title: 'Todo 2',
+      priority: 'Low',
+      status: 'pending',
+      completed: false,
+    },
+    {
+      id: 3,
+      title: 'Todo 3',
+      priority: 'Medium',
+      status: 'doing',
+      completed: false,
+    },
+    {
+      id: 4,
+      title: 'Todo 4',
+      priority: 'Medium',
+      status: 'doing',
+      completed: false,
+    },
+    {
+      id: 5,
+      title: 'Todo 5',
+      priority: 'High',
+      status: 'finished',
+      completed: true,
+    },
+    {
+      id: 6,
+      title: 'Todo 6',
+      priority: 'High',
+      status: 'finished',
+      completed: true,
+    },
+  ];
+  const [TODO, setTODO] = useState({});
+  useEffect(() => {
+    console.log('id', id);
+    if (id) {
+      setTODO(TODOItemsTest.filter(item => parseInt(id) === item.id)[0]);
+    }
+  }, [id]);
+  console.log('TODO', TODO)
   return (
     <DetailStyles>
       <div className="form-container">
         <div className="form-container__head">
           <div className="form-todo-title field">
             <TextArea
-              value="Un titulo con mucho texto"
+              value={TODO.title || 'Un titulo con mucho texto'}
               handleChange={e => console.log(e.target.value)}
             ></TextArea>
           </div>
@@ -28,10 +82,10 @@ const TODODetail = ({ TODO = null }) => {
               Completed
             </Label>
             <CheckBox
-              value={true}
+              value={TODO.completed || false}
               handleChange={e => console.log(e.target.value)}
               name="completed"
-              checked={true}
+              checked={TODO.completed || false}
             />
           </div>
 
@@ -43,10 +97,7 @@ const TODODetail = ({ TODO = null }) => {
         <div className="form-todo__description field">
           <TextArea
             name="description"
-            value="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Duis vel nisi a felis aliquet suscipit.
-                Suspendisse tincidunt, erat at tempus elementum,
-                nulla magna posuere tellus, eget maximus quam urna facilisis tellus. Donec consequat quis nisl eget aliquet. Nulla aliquam, justo a tincidunt vulputate, nisi neque varius urna, ut venenatis mi ante ut sapien. Cras placerat lorem vel nunc mollis luctus vel vitae lacus. Aenean elementum porttitor erat. Sed a quam vitae felis gravida posuere at at libero. Morbi sit amet massa velit. Donec imperdiet sed magna vel tincidunt. Pellentesque bibendum fermentum convallis."
+            value={TODO.description || 'Description'}
             handleChange={e => console.log(e.target.value)}
             sx={{
               height: '100%',

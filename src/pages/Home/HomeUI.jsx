@@ -1,11 +1,10 @@
+import { lazy, Suspense } from 'react';
 import { Button } from '@components/Button';
 import { TODO } from '@components/TODO';
 import { Modal } from '@components/Modal';
-import { TextArea } from '@components/Inputs/TextArea';
-import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
-import { SimpleSelect } from '@components/Inputs/Selects';
-import { Label } from '@components/Label';
-import { HomeStyles, FormStyle } from './HomeStyles';
+import { HomeStyles } from './HomeStyles';
+
+const Detail = lazy(() => import('@pages/Detail'));
 
 const HomeUI = ({
   query,
@@ -99,6 +98,7 @@ const HomeUI = ({
                     priority={item.priority}
                     handleRemove={() => handleRemoveItem(item.id)}
                     handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                    id={item.id}
                   ></TODO>
                 ))}
             </div>
@@ -116,6 +116,7 @@ const HomeUI = ({
                     priority={item.priority}
                     handleRemove={() => handleRemoveItem(item.id)}
                     handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                    id={item.id}
                   ></TODO>
                 ))}
             </div>
@@ -133,6 +134,7 @@ const HomeUI = ({
                     priority={item.priority}
                     handleRemove={() => handleRemoveItem(item.id)}
                     handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                    id={item.id}
                     finished
                   ></TODO>
                 ))}
@@ -141,55 +143,9 @@ const HomeUI = ({
         </div>
       </div>
       <Modal open={open} onClose={onCloseModal}>
-        <FormStyle>
-          <div className="form-container">
-            <div className="form-container__head">
-              <div className="form-todo-title field">
-                <TextArea
-                  value="Un titulo con mucho texto"
-                  handleChange={e => console.log(e.target.value)}
-                ></TextArea>
-              </div>
-
-              <div className="form-todo__completed field">
-                <Label
-                  sx={{
-                    margin: '0px 10px 0px 0px',
-                    color: 'rgba(255, 255, 255, .7)',
-                    fontSize: '1.8rem',
-                  }}
-                >
-                  Completed
-                </Label>
-                <CheckBox
-                  value={true}
-                  handleChange={e => console.log(e.target.value)}
-                  name="completed"
-                  checked={true}
-                />
-              </div>
-
-              <div className="form-todo__priority field">
-                <SimpleSelect />
-              </div>
-            </div>
-
-            <div className="form-todo__description field">
-              <TextArea
-                name="description"
-                value="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Duis vel nisi a felis aliquet suscipit.
-                Suspendisse tincidunt, erat at tempus elementum,
-                nulla magna posuere tellus, eget maximus quam urna facilisis tellus. Donec consequat quis nisl eget aliquet. Nulla aliquam, justo a tincidunt vulputate, nisi neque varius urna, ut venenatis mi ante ut sapien. Cras placerat lorem vel nunc mollis luctus vel vitae lacus. Aenean elementum porttitor erat. Sed a quam vitae felis gravida posuere at at libero. Morbi sit amet massa velit. Donec imperdiet sed magna vel tincidunt. Pellentesque bibendum fermentum convallis."
-                handleChange={e => console.log(e.target.value)}
-                sx={{
-                  height: '100%',
-                  fontSize: '1.6rem',
-                }}
-              />
-            </div>
-          </div>
-        </FormStyle>
+        <Suspense fallback={<div>Loading</div>}>
+          <Detail></Detail>
+        </Suspense>
       </Modal>
     </HomeStyles>
   );

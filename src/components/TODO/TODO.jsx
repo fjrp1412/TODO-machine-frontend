@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TODOStyles } from './TODOStyles';
 
 const TODO = ({
@@ -7,10 +8,14 @@ const TODO = ({
   handleRemove,
   handleToggleCompleted,
   finished,
+  id,
 }) => {
   return (
     <TODOStyles>
-      <div className="TODO-title">{title}</div>
+      <div className="TODO-container__head">
+        <div className="TODO-title">{title}</div>
+        <Link className="TODO-arrow" to={`/${id}`}></Link>
+      </div>
 
       <div className="TODO-priority">{priority}</div>
 
