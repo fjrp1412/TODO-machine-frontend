@@ -5,6 +5,9 @@ import { Modal } from '@components/Modal';
 import { HomeStyles } from './HomeStyles';
 
 const Detail = lazy(() => import('@pages/Detail'));
+const MultiSelect = lazy(() =>
+  import('@components/Inputs/Selects/MultiSelect')
+);
 
 const HomeUI = ({
   query,
@@ -37,40 +40,46 @@ const HomeUI = ({
         </div>
 
         <div className="content-filter">
-          <div className="filter-options">
-            <div
-              className={`filter-options__option ${
-                !!query['low'] ? 'selected' : ''
-              }`}
-              onClick={() => handleChangeQuery('low')}
-            >
-              Low
+          {screenSize > 470 ? (
+            <div className="filter-options">
+              <div
+                className={`filter-options__option ${
+                  !!query['low'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('low')}
+              >
+                Low
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['medium'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('medium')}
+              >
+                Medium
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['high'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('high')}
+              >
+                High
+              </div>
+              <div
+                className={`filter-options__option ${
+                  !!query['all'] ? 'selected' : ''
+                }`}
+                onClick={() => handleChangeQuery('all')}
+              >
+                All
+              </div>
             </div>
-            <div
-              className={`filter-options__option ${
-                !!query['medium'] ? 'selected' : ''
-              }`}
-              onClick={() => handleChangeQuery('medium')}
-            >
-              Medium
-            </div>
-            <div
-              className={`filter-options__option ${
-                !!query['high'] ? 'selected' : ''
-              }`}
-              onClick={() => handleChangeQuery('high')}
-            >
-              High
-            </div>
-            <div
-              className={`filter-options__option ${
-                !!query['all'] ? 'selected' : ''
-              }`}
-              onClick={() => handleChangeQuery('all')}
-            >
-              All
-            </div>
-          </div>
+          ) : (
+            <Suspense fallback={null}>
+              <MultiSelect></MultiSelect>
+            </Suspense>
+          )}
 
           <div className="filter-buttons">
             <Button
