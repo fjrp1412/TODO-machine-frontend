@@ -8,6 +8,10 @@ const Home = () => {
     high: false,
     all: true,
   });
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
+  window.addEventListener('resize', () => {
+    setScreenSize(window.innerWidth);
+  });
   const TODOItemsTest = [
     {
       id: 1,
@@ -60,7 +64,7 @@ const Home = () => {
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
 
-/*
+  /*
   Setting the filteredTODOs to the TODOItems every time TODOItems change. 
 
   It is called when component is mountend and when TODOItems change
@@ -69,7 +73,7 @@ const Home = () => {
     setFilteredTODOs(TODOItems);
   }, [TODOItems]);
 
-/* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
+  /* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
   useEffect(() => {
     setPendings(
       filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
@@ -82,7 +86,7 @@ const Home = () => {
     );
   }, [filteredTOODs]);
 
-/* Filtering the TODOItems by the query. */
+  /* Filtering the TODOItems by the query. */
   useEffect(() => {
     let auxFiltered = [...TODOItems];
     if (query['all']) {
@@ -107,27 +111,27 @@ const Home = () => {
     setFilteredTODOs(auxFiltered);
   }, [query]);
 
-/**
- * The function takes a field as an argument, and then sets the query state to the current query state,
- * but with the field that was passed in toggled
- */
+  /**
+   * The function takes a field as an argument, and then sets the query state to the current query state,
+   * but with the field that was passed in toggled
+   */
   const handleChangeQuery = field => {
     setQuery({ ...query, [field]: !query[field] });
   };
 
-/**
- * If the id of the item is not equal to the id of the item we want to remove, then keep it in the
- * array.
- */
+  /**
+   * If the id of the item is not equal to the id of the item we want to remove, then keep it in the
+   * array.
+   */
   const handleRemoveItem = id => {
     setTODOItems(previous => previous.filter(item => item.id !== id));
   };
 
-/**
- * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
- * toggling the item's completed property and setting the item's status to either 'finished' or
- * 'pending' depending on the item's completed property
- */
+  /**
+   * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
+   * toggling the item's completed property and setting the item's status to either 'finished' or
+   * 'pending' depending on the item's completed property
+   */
   const handleToggleCompleted = id => {
     setTODOItems(
       TODOItems.map(item => {
@@ -155,6 +159,7 @@ const Home = () => {
       open={open}
       onOpenModal={() => setOpen(true)}
       onCloseModal={() => setOpen(false)}
+      screenSize={screenSize}
     />
   );
 };

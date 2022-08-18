@@ -32,6 +32,11 @@ const HomeStyles = styled.div`
     width: 50%;
     font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.8);
+
+    @media only screen and (max-width: 800px) {
+      margin-bottom: 10px;
+      width: 70%;
+    }
   }
   .content-filter {
     display: flex;

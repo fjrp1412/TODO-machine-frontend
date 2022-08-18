@@ -17,6 +17,7 @@ const HomeUI = ({
   open,
   onOpenModal,
   onCloseModal,
+  screenSize,
 }) => {
   return (
     <HomeStyles>

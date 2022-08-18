@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ArrowIcon from '@assets/open-diagonal-arrow.png';
 
 const LayoutStyles = styled.div`
   width: 100%;
@@ -27,6 +28,8 @@ const LayoutStyles = styled.div`
     flex-direction: column;
     align-items: center;
   }
+
+
 
 `;
 
