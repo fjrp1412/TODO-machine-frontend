@@ -4,7 +4,7 @@ import CheckGreen from '@assets/check-green.png';
 import Delete from '@assets/delete.png';
 import OpenArrow from '@assets/open-diagonal-arrow.png';
 
-const TODOStyles = styled.div`
+const ItemStyles = styled.div`
   display: flex;
   width: 100%;
   height: 100px;
@@ -68,4 +68,4 @@ const TODOStyles = styled.div`
   }
 `;
 
-export { TODOStyles };
+export { ItemStyles };

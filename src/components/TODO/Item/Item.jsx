@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TODOStyles } from './TODOStyles';
+import { ItemStyles } from './ItemStyles';
 
-const TODO = ({
+const Item = ({
   title,
   priority,
   handleRemove,
@@ -11,7 +11,7 @@ const TODO = ({
   id,
 }) => {
   return (
-    <TODOStyles>
+    <ItemStyles>
       <div className="TODO-container__head">
         <div className="TODO-title">{title}</div>
         <Link className="TODO-arrow" to={`/${id}`}></Link>
@@ -31,8 +31,8 @@ const TODO = ({
           onClick={handleToggleCompleted}
         ></span>
       </div>
-    </TODOStyles>
+    </ItemStyles>
   );
 };
 
-export { TODO };
+export { Item };

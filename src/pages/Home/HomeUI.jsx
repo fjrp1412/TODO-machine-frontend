@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Button } from '@components/Button';
-import { TODO } from '@components/TODO';
+import { Item, ItemContainer } from '@components/TODO';
 import { Modal } from '@components/Modal';
 import { HomeStyles } from './HomeStyles';
 
@@ -97,59 +97,48 @@ const HomeUI = ({
         </div>
 
         <div className="content-TODOs">
-          <div className="TODOs-container pending">
-            <div className="TODOs-container__head">Pending</div>
-            <div className="TODOs-container__list">
-              {pendings &&
-                pendings?.map(item => (
-                  <TODO
-                    key={item.id}
-                    title={item.title}
-                    priority={item.priority}
-                    handleRemove={() => handleRemoveItem(item.id)}
-                    handleToggleCompleted={() => handleToggleCompleted(item.id)}
-                    id={item.id}
-                  ></TODO>
-                ))}
-            </div>
-          </div>
+          <ItemContainer status="Pending">
+            {pendings &&
+              pendings?.map(item => (
+                <Item
+                  key={item.id}
+                  title={item.title}
+                  priority={item.priority}
+                  handleRemove={() => handleRemoveItem(item.id)}
+                  handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                  id={item.id}
+                ></Item>
+              ))}
+          </ItemContainer>
 
-          <div className="TODOs-container doing">
-            <div className="TODOs-container__head">Doing</div>
+          <ItemContainer status="Doing">
+            {doings &&
+              doings?.map(item => (
+                <Item
+                  key={item.id}
+                  title={item.title}
+                  priority={item.priority}
+                  handleRemove={() => handleRemoveItem(item.id)}
+                  handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                  id={item.id}
+                ></Item>
+              ))}
+          </ItemContainer>
 
-            <div className="TODOs-container__list">
-              {doings &&
-                doings?.map(item => (
-                  <TODO
-                    key={item.id}
-                    title={item.title}
-                    priority={item.priority}
-                    handleRemove={() => handleRemoveItem(item.id)}
-                    handleToggleCompleted={() => handleToggleCompleted(item.id)}
-                    id={item.id}
-                  ></TODO>
-                ))}
-            </div>
-          </div>
-
-          <div className="TODOs-container finish">
-            <div className="TODOs-container__head">Finished</div>
-
-            <div className="TODOs-container__list">
-              {finisheds &&
-                finisheds?.map(item => (
-                  <TODO
-                    key={item.id}
-                    title={item.title}
-                    priority={item.priority}
-                    handleRemove={() => handleRemoveItem(item.id)}
-                    handleToggleCompleted={() => handleToggleCompleted(item.id)}
-                    id={item.id}
-                    finished
-                  ></TODO>
-                ))}
-            </div>
-          </div>
+          <ItemContainer status="Finished">
+            {finisheds &&
+              finisheds?.map(item => (
+                <Item
+                  key={item.id}
+                  title={item.title}
+                  priority={item.priority}
+                  handleRemove={() => handleRemoveItem(item.id)}
+                  handleToggleCompleted={() => handleToggleCompleted(item.id)}
+                  id={item.id}
+                  finished
+                ></Item>
+              ))}
+          </ItemContainer>
         </div>
       </div>
       <Modal open={open} onClose={onCloseModal}>
