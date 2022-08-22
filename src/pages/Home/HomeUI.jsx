@@ -21,6 +21,7 @@ const HomeUI = ({
   onOpenModal,
   onCloseModal,
   screenSize,
+  handleDrop,
 }) => {
   return (
     <HomeStyles>
@@ -107,6 +108,7 @@ const HomeUI = ({
                   handleRemove={() => handleRemoveItem(item.id)}
                   handleToggleCompleted={() => handleToggleCompleted(item.id)}
                   id={item.id}
+                  handleDrop={handleDrop}
                 ></Item>
               ))}
           </ItemContainer>
@@ -121,6 +123,7 @@ const HomeUI = ({
                   handleRemove={() => handleRemoveItem(item.id)}
                   handleToggleCompleted={() => handleToggleCompleted(item.id)}
                   id={item.id}
+                  handleDrop={handleDrop}
                 ></Item>
               ))}
           </ItemContainer>
@@ -136,6 +139,7 @@ const HomeUI = ({
                   handleToggleCompleted={() => handleToggleCompleted(item.id)}
                   id={item.id}
                   finished
+                  handleDrop={handleDrop}
                 ></Item>
               ))}
           </ItemContainer>

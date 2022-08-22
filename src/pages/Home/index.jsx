@@ -147,6 +147,25 @@ const Home = () => {
     );
   };
 
+/**
+ * If the status is not a falsy value, then we map through the previous state and return a new array with the item
+ * that has the same id as the id that was passed in, and we set the status to the status that was
+ * passed in, and we set the completed to the status that was passed in
+ */
+  const handleDrop = (id, status) => {
+    if (status) {
+      setTODOItems(previous =>
+        previous.map(item => {
+          if (item.id === id) {
+            item.status = status;
+            item.completed = status === 'finished';
+          }
+          return item;
+        })
+      );
+    }
+  };
+
   return (
     <HomeUI
       query={query}
@@ -160,6 +179,7 @@ const Home = () => {
       onOpenModal={() => setOpen(true)}
       onCloseModal={() => setOpen(false)}
       screenSize={screenSize}
+      handleDrop={handleDrop}
     />
   );
 };

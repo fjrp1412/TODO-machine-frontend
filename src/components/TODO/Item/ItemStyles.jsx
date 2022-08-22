@@ -13,6 +13,8 @@ const ItemStyles = styled.div`
   justify-content: space-around;
   padding: 0px 10px;
   background-color: #202020;
+  opacity: ${props => props.opacity};
+  cursor: ${props => props.cursor};
 
   .TODO-container__head {
     width: 100%;
@@ -34,7 +36,6 @@ const ItemStyles = styled.div`
     cursor: pointer;
   }
 
-
   .TODO-priority {
     font-size: 1.4rem;
   }
@@ -53,7 +54,6 @@ const ItemStyles = styled.div`
     height: 25px;
     cursor: pointer;
   }
-
 
   .check {
     background-image: url(${CheckWhite});
