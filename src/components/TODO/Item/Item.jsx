@@ -27,7 +27,7 @@ const Item = ({
     <ItemStyles
       ref={drag}
       opacity={isDragging ? 0.5 : 1}
-      cursor={isDragging ? 'move' : 'pointer'}
+      cursor={isDragging ? 'grabbing' : 'grab'}
     >
       <div className="TODO-container__head">
         <div className="TODO-title">{title}</div>
