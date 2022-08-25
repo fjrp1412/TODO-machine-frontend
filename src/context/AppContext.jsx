@@ -4,17 +4,17 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [userWorkspaces, setUserWorkspaces] = useState(null);
-  const token = window.localStorage.getItem("token");
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [value, setValue] = useState({});
 
   useEffect(() => {
-    if(token) {
-        setUserWorkspaces(JSON.parse(window.localStorage.getItem("userWorkspaces")));
+    if (token) {
+      window.localStorage.setItem('token', JSON.stringify(token));
     }
-  }, [token])
+  }, [token]);
 
   useEffect(() => {
-    setValue({ token, userWorkspaces });
+    setValue({ token, setToken, userWorkspaces, setUserWorkspaces });
   }, [token, userWorkspaces]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

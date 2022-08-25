@@ -1,15 +1,30 @@
+import { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { LoginUI } from './LoginUI';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '@context';
+import useApi from '@hooks/useApi';
+
 import * as Yup from 'yup';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setToken } = useContext(AppContext);
+  const [body, setBody] = useState();
+  const { response, loading, errors } = useApi('user/token/', 'POST', body);
+
+  useEffect(() => {
+    if (response?.data.token) {
+      setToken(response.data.token);
+      window.localStorage.setItem('token', response.data.token);
+      navigate('/', { replace: true });
+    }
+  }, [response]);
+
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
-      repeatPassword: '',
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -18,34 +33,7 @@ const Login = () => {
       password: Yup.string().required('Password required'),
     }),
     onSubmit: values => {
-      const userWorkspaces = [
-        {
-          id: 1,
-          title: 'workspace 1',
-        },
-        {
-          id: 2,
-          title: 'workspace 2',
-        },
-        {
-          id: 3,
-          title: 'workspace 3',
-        },
-        {
-          id: 4,
-          title: 'workspace 4',
-        },
-      ];
-      window.localStorage.setItem('token', JSON.stringify('token de prueba'));
-      const token = JSON.parse(window.localStorage.getItem('token'));
-      window.localStorage.setItem(
-        'userWorkspaces',
-        JSON.stringify(userWorkspaces)
-      );
-
-      if (token) {
-        navigate('/', { replace: true });
-      }
+      setBody(values);
     },
   });
 

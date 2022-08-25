@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { HomeUI } from './HomeUI';
+import { AppContext } from '@context';
+import useApi from '@hooks/useApi';
 
 const Home = () => {
   const [query, setQuery] = useState({
@@ -12,6 +14,8 @@ const Home = () => {
   window.addEventListener('resize', () => {
     setScreenSize(window.innerWidth);
   });
+
+  const { token, setToken } = useContext(AppContext);
   const TODOItemsTest = [
     {
       id: 1,
@@ -63,6 +67,7 @@ const Home = () => {
   const [TODOItems, setTODOItems] = useState(TODOItemsTest);
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
+
 
   /*
   Setting the filteredTODOs to the TODOItems every time TODOItems change. 
@@ -147,11 +152,11 @@ const Home = () => {
     );
   };
 
-/**
- * If the status is not a falsy value, then we map through the previous state and return a new array with the item
- * that has the same id as the id that was passed in, and we set the status to the status that was
- * passed in, and we set the completed to the status that was passed in
- */
+  /**
+   * If the status is not a falsy value, then we map through the previous state and return a new array with the item
+   * that has the same id as the id that was passed in, and we set the status to the status that was
+   * passed in, and we set the completed to the status that was passed in
+   */
   const handleDrop = (id, status) => {
     if (status) {
       setTODOItems(previous =>
