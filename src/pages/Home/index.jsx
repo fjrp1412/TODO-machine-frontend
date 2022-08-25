@@ -15,7 +15,21 @@ const Home = () => {
     setScreenSize(window.innerWidth);
   });
 
-  const { token, setToken } = useContext(AppContext);
+  const { token, setUser, setUserWorkspaces, user, userWorkspaces } =
+    useContext(AppContext);
+
+  const { response, loading, errors } = useApi({
+    url: 'user/me/',
+    method: 'GET',
+    token,
+  });
+
+  useEffect(() => {
+    setUser(response?.data.user);
+    setUserWorkspaces(response?.data.workspaces);
+  }, [response]);
+
+
   const TODOItemsTest = [
     {
       id: 1,
@@ -67,7 +81,6 @@ const Home = () => {
   const [TODOItems, setTODOItems] = useState(TODOItemsTest);
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
-
 
   /*
   Setting the filteredTODOs to the TODOItems every time TODOItems change. 

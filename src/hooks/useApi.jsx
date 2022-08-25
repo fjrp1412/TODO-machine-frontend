@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
-export default function useApi(url, method, body) {
+export default function useApi({ url, method, body, token }) {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
@@ -25,6 +25,9 @@ export default function useApi(url, method, body) {
             url: url,
             method: method,
             data: body,
+            headers: {
+              Authorization: `Token ${token}`,
+            },
           });
           setResponse(response);
           setLoading(false);
@@ -32,6 +35,17 @@ export default function useApi(url, method, body) {
 
           console.log('response POST method', response);
         }
+      } else if (method === TYPES.GET) {
+        const response = await axiosInstance({
+          url: url,
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        setResponse(response);
+        setLoading(false);
+        setErrors(null);
+        console.log('response GET method', response);
       }
     })();
   }, [url, method, body]);

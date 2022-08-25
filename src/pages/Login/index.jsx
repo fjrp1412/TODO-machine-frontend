@@ -11,12 +11,16 @@ const Login = () => {
   const navigate = useNavigate();
   const { setToken } = useContext(AppContext);
   const [body, setBody] = useState();
-  const { response, loading, errors } = useApi('user/token/', 'POST', body);
+  const { response, loading, errors } = useApi({
+    url: 'user/token/',
+    method: 'POST',
+    body,
+  });
 
   useEffect(() => {
     if (response?.data.token) {
       setToken(response.data.token);
-      window.localStorage.setItem('token', response.data.token);
+      window.localStorage.setItem('token', JSON.stringify(response.data.token));
       navigate('/', { replace: true });
     }
   }, [response]);
