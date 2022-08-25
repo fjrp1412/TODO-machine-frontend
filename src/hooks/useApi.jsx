@@ -33,10 +33,9 @@ export default function useApi({ url, method, body, token }) {
           setLoading(false);
           setErrors(null);
 
-          console.log('response POST method', response);
+          //console.log('response POST method', response);
         }
       } else if (method === TYPES.GET) {
-        console.log('url workspace', url);
         const response = await axiosInstance({
           url: url,
           headers: {
@@ -46,7 +45,7 @@ export default function useApi({ url, method, body, token }) {
         setResponse(response);
         setLoading(false);
         setErrors(null);
-        console.log('response GET method', response);
+        //console.log('response GET method', response);
       }
     })();
   }, [url, method, body]);

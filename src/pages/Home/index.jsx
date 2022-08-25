@@ -17,8 +17,9 @@ const Home = () => {
 
   const [TODOItems, setTODOItems] = useState([]);
 
+  const token = JSON.parse(window.localStorage.getItem('token'));
+
   const {
-    token,
     setUser,
     setUserWorkspaces,
     user,
@@ -34,20 +35,10 @@ const Home = () => {
   });
 
   const workspaceResponse = useApi({
-    url: `workspace/${selectedWorkspace || ''}/`,
+    url: `workspace/${selectedWorkspace ? selectedWorkspace + '/' : ''}`,
     method: 'GET',
     token,
   });
-
-  useEffect(() => {
-    setUser(userResponse.response?.data.user);
-    setUserWorkspaces(userResponse.response?.data.workspaces);
-    setSelectedWorkspace(userResponse.response?.data.workspaces[0].id);
-  }, [userResponse]);
-
-  useEffect(() => {
-    setTODOItems(workspaceResponse.response?.data.TODOs);
-  }, [workspaceResponse]);
 
   const [pendings, setPendings] = useState([]);
   const [doings, setDoings] = useState([]);
@@ -55,6 +46,18 @@ const Home = () => {
 
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setUser(userResponse.response?.data.user);
+    setUserWorkspaces(userResponse.response?.data.workspaces);
+    if (!selectedWorkspace) {
+      setSelectedWorkspace(userResponse.response?.data.workspaces[0].id);
+    }
+  }, [userResponse]);
+
+  useEffect(() => {
+    setTODOItems(workspaceResponse.response?.data.TODOs);
+  }, [workspaceResponse]);
 
   /*
   Setting the filteredTODOs to the TODOItems every time TODOItems change. 
