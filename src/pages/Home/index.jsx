@@ -15,70 +15,44 @@ const Home = () => {
     setScreenSize(window.innerWidth);
   });
 
-  const { token, setUser, setUserWorkspaces, user, userWorkspaces } =
-    useContext(AppContext);
+  const [TODOItems, setTODOItems] = useState([]);
 
-  const { response, loading, errors } = useApi({
+  const {
+    token,
+    setUser,
+    setUserWorkspaces,
+    user,
+    userWorkspaces,
+    setSelectedWorkspace,
+    selectedWorkspace,
+  } = useContext(AppContext);
+
+  const userResponse = useApi({
     url: 'user/me/',
     method: 'GET',
     token,
   });
 
+  const workspaceResponse = useApi({
+    url: `workspace/${selectedWorkspace || ''}/`,
+    method: 'GET',
+    token,
+  });
+
   useEffect(() => {
-    setUser(response?.data.user);
-    setUserWorkspaces(response?.data.workspaces);
-  }, [response]);
+    setUser(userResponse.response?.data.user);
+    setUserWorkspaces(userResponse.response?.data.workspaces);
+    setSelectedWorkspace(userResponse.response?.data.workspaces[0].id);
+  }, [userResponse]);
 
+  useEffect(() => {
+    setTODOItems(workspaceResponse.response?.data.TODOs);
+  }, [workspaceResponse]);
 
-  const TODOItemsTest = [
-    {
-      id: 1,
-      title: 'Todo 1',
-      priority: 'Low',
-      status: 'pending',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Todo 2',
-      priority: 'Low',
-      status: 'pending',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Todo 3',
-      priority: 'Medium',
-      status: 'doing',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'Todo 4',
-      priority: 'Medium',
-      status: 'doing',
-      completed: false,
-    },
-    {
-      id: 5,
-      title: 'Todo 5',
-      priority: 'High',
-      status: 'finished',
-      completed: true,
-    },
-    {
-      id: 6,
-      title: 'Todo 6',
-      priority: 'High',
-      status: 'finished',
-      completed: true,
-    },
-  ];
   const [pendings, setPendings] = useState([]);
   const [doings, setDoings] = useState([]);
   const [finisheds, setFinisheds] = useState([]);
 
-  const [TODOItems, setTODOItems] = useState(TODOItemsTest);
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
 

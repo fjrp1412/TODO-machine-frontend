@@ -36,6 +36,7 @@ export default function useApi({ url, method, body, token }) {
           console.log('response POST method', response);
         }
       } else if (method === TYPES.GET) {
+        console.log('url workspace', url);
         const response = await axiosInstance({
           url: url,
           headers: {

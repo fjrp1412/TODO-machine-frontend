@@ -4,7 +4,10 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [userWorkspaces, setUserWorkspaces] = useState(null);
-  const [token, setToken] = useState(JSON.parse(window.localStorage.getItem('token')));
+  const [selectedWorkspace, setSelectedWorkspace] = useState(null);
+  const [token, setToken] = useState(
+    JSON.parse(window.localStorage.getItem('token'))
+  );
   const [value, setValue] = useState({});
   const [user, setUser] = useState(null);
 
@@ -26,8 +29,10 @@ const AppProvider = ({ children }) => {
       setUserWorkspaces,
       user,
       setUser,
+      selectedWorkspace,
+      setSelectedWorkspace,
     });
-  }, [token, userWorkspaces, user]);
+  }, [token, userWorkspaces, user, selectedWorkspace]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
