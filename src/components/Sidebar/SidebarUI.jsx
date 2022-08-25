@@ -19,12 +19,12 @@ const SidebarUI = ({ items, handleItemSelect, selected }) => {
         <div className="sidebar-content">
           <div className="sidebar-content__container">
             {items &&
-              items.map((item, idx) => (
+              items.map(item => (
                 <div
                   className={`sidebar-content__item ${
-                    selected === idx ? 'selected' : ''
+                    selected === item.id ? 'selected' : ''
                   }`}
-                  onClick={() => handleItemSelect(idx)}
+                  onClick={() => handleItemSelect(item.id)}
                   key={item.id}
                 >
                   <span>{item.title}</span>

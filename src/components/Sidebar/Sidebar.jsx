@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { SidebarUI } from './SidebarUI';
 
-const Sidebar = ({ items }) => {
-  const [selected, setSelected] = useState(0);
+const Sidebar = ({ items, selected, setSelected }) => {
 
-  const handleItemSelect = idx => {
-    setSelected(idx);
+  const handleItemSelect = id => {
+    setSelected(id);
   };
   return (
     <SidebarUI
