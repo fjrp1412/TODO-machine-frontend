@@ -68,19 +68,6 @@ const Home = () => {
     setFilteredTODOs(TODOItems);
   }, [TODOItems]);
 
-  /* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
-  useEffect(() => {
-    setPendings(
-      filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
-    );
-    setDoings(
-      filteredTOODs?.filter(item => item.status.toLowerCase() === 'doing')
-    );
-    setFinisheds(
-      filteredTOODs?.filter(item => item.status.toLowerCase() === 'finished')
-    );
-  }, [filteredTOODs]);
-
   /* Filtering the TODOItems by the query. */
   useEffect(() => {
     let auxFiltered = [...TODOItems];
@@ -122,17 +109,17 @@ const Home = () => {
     setTODOItems(previous => previous.filter(item => item.id !== id));
   };
 
-  /**
-   * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
-   * toggling the item's completed property and setting the item's status to either 'finished' or
-   * 'pending' depending on the item's completed property
-   */
+
+/**
+ * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
+ * toggling the item's completed property and setting the item's status to either 'finished' or
+ * 'pending' depending on the item's completed property
+ */
   const handleToggleCompleted = id => {
     setTODOItems(
       TODOItems.map(item => {
         if (item.id === id) {
           item.completed = !item.completed;
-
           item.status = item.completed ? 'finished' : 'pending';
           return item;
         }
@@ -142,24 +129,54 @@ const Home = () => {
     );
   };
 
-  /**
-   * If the status is not a falsy value, then we map through the previous state and return a new array with the item
-   * that has the same id as the id that was passed in, and we set the status to the status that was
-   * passed in, and we set the completed to the status that was passed in
-   */
+
+  const [itemDragged, setItemDragged] = useState(null);
+
+  const dndTodoItemResponse = useApi({
+    token,
+    url: `todo/${itemDragged?.id}/`,
+    body: itemDragged,
+    method: 'PATCH',
+  });
+
+
+/**
+ * It takes an id and a status as parameters, and if the status sended is different from the status of the item,
+ * it maps through the todo items and sets the status of the item with the matching id to the status passed in.
+ * 
+ * Also, set the ItemDragged for update state in useApi hook to send PATCH method to the api on the purpose of update
+ * the status and completed attributes of the item
+ * 
+ */
   const handleDrop = (id, status) => {
     if (status) {
       setTODOItems(previous =>
         previous.map(item => {
-          if (item.id === id) {
+          if (item.id === id && item.status !== status) {
+            console.log('entre')
             item.status = status;
             item.completed = status === 'finished';
+            console.log('item', item);
+            setItemDragged(item);
           }
           return item;
         })
       );
     }
   };
+
+  /* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
+  useEffect(() => {
+      setPendings(
+        filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
+      );
+      setDoings(
+        filteredTOODs?.filter(item => item.status.toLowerCase() === 'doing')
+      );
+      setFinisheds(
+        filteredTOODs?.filter(item => item.status.toLowerCase() === 'finished')
+      );
+  }, [filteredTOODs]);
 
   return (
     <HomeUI
