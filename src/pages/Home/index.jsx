@@ -47,6 +47,8 @@ const Home = () => {
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
 
+  const [, updateState] = React.useState();
+
   useEffect(() => {
     setUser(userResponse.response?.data.user);
     setUserWorkspaces(userResponse.response?.data.workspaces);
@@ -105,8 +107,16 @@ const Home = () => {
    * If the id of the item is not equal to the id of the item we want to remove, then keep it in the
    * array.
    */
+  const [selectedItemRemove, setSelectedItemRemove] = useState(null);
+  const deleteItemResponse = useApi({
+    url: `todo/${selectedItemRemove ? selectedItemRemove + '/' : ''}`,
+    method: selectedItemRemove && 'DELETE',
+    token,
+  });
+
   const handleRemoveItem = id => {
-    setTODOItems(previous => previous.filter(item => item.id !== id));
+    setSelectedItemRemove(id);
+    setFilteredTODOs(previous => previous.filter(item => item.id !== id));
   };
 
   /**
@@ -132,9 +142,9 @@ const Home = () => {
 
   const dndTodoItemResponse = useApi({
     token,
-    url: `todo/${itemDragged?.id}/`,
+    url: `todo/${itemDragged?.id ? itemDragged.id + '/' : ''}`,
     body: itemDragged,
-    method: 'PATCH',
+    method: itemDragged?.id && 'PATCH',
   });
 
   /**
@@ -150,10 +160,8 @@ const Home = () => {
       setTODOItems(previous =>
         previous.map(item => {
           if (item.id === id && item.status !== status) {
-            console.log('entre');
             item.status = status;
             item.completed = status === 'finished';
-            console.log('item', item);
             setItemDragged(item);
           }
           return item;
@@ -161,6 +169,24 @@ const Home = () => {
       );
     }
   };
+
+  const [createTODOBody, setCreateTODOBody] = useState(null);
+
+  const createTODOResponse = useApi({
+    method: createTODOBody && 'POST',
+    token,
+    url: 'todo/',
+    body: createTODOBody,
+  });
+  const handleAddTODO = () => {
+    setCreateTODOBody({ workspace: selectedWorkspace.id });
+  };
+
+  useEffect(() => {
+    if (createTODOResponse.response) {
+      setFilteredTODOs([...filteredTOODs, {...createTODOResponse.response.data}]);
+    }
+  }, [createTODOResponse.response]);
 
   /* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
   useEffect(() => {
@@ -190,6 +216,7 @@ const Home = () => {
       screenSize={screenSize}
       handleDrop={handleDrop}
       workspace={selectedWorkspace}
+      handleAddTODO={handleAddTODO}
     />
   );
 };

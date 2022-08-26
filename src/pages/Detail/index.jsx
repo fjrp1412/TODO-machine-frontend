@@ -19,9 +19,7 @@ const TODODetail = () => {
   const [TODO, setTODO] = useState({});
 
   useEffect(() => {
-    console.log('id', id);
     if (!TODOresponse.loading) {
-      console.log('TODO response', TODOresponse)
       setTODO(TODOresponse.response.data);
     }
   }, [TODOresponse]);
@@ -31,7 +29,6 @@ const TODODetail = () => {
       console.log('sali')
     }
   }, [])
-  console.log('TODO', TODO)
   return (
     <DetailStyles>
       <div className="form-container">

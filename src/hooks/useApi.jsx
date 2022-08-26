@@ -20,7 +20,7 @@ export default function useApi({ url, method, body, token }) {
   useEffect(() => {
     (async function requestApi() {
       if (method === TYPES.POST) {
-        if (body) {
+        try {
           const response = await axiosInstance({
             url: url,
             method: method,
@@ -33,7 +33,11 @@ export default function useApi({ url, method, body, token }) {
           setLoading(false);
           setErrors(null);
 
-          //console.log('response POST method', response);
+          console.log('response POST method', response);
+        } catch (e) {
+          setResponse(null);
+          setLoading(false);
+          setErrors(e);
         }
       } else if (method === TYPES.GET) {
         const response = await axiosInstance({
@@ -45,9 +49,9 @@ export default function useApi({ url, method, body, token }) {
         setResponse(response);
         setLoading(false);
         setErrors(null);
-        console.log('response GET method', response);
+        //console.log('response GET method', response);
       } else if (method === TYPES.PATCH) {
-        if (body) {
+        try {
           const response = await axiosInstance({
             url: url,
             method: method,
@@ -60,7 +64,28 @@ export default function useApi({ url, method, body, token }) {
           setLoading(false);
           setErrors(null);
           //console.log('response PATCH method', response);
+        } catch (e) {
+          setResponse(null);
+          setLoading(false);
+          setErrors(e);
         }
+      } else if (method === TYPES.DELETE) {
+        const response = await axiosInstance({
+          url: url,
+          method: method,
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        });
+        setResponse(response);
+        setLoading(false);
+        setErrors(null);
+       // console.log('response DELETE method', response);
+      }
+      else {
+        setResponse(null);
+        setLoading(false);
+        setErrors(null);
       }
     })();
   }, [url, method, body]);

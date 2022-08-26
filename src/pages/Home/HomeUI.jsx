@@ -23,6 +23,7 @@ const HomeUI = ({
   screenSize,
   handleDrop,
   workspace,
+  handleAddTODO,
 }) => {
   return (
     <HomeStyles>
@@ -84,7 +85,10 @@ const HomeUI = ({
             <Button
               type="button"
               className="filter-buttons__button"
-              handleClick={onOpenModal}
+              handleClick={() => {
+                onOpenModal();
+                handleAddTODO();
+              }}
               sx={{
                 width: '80px',
                 margin: '0px 5px',
