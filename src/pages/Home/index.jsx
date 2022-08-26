@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { HomeUI } from './HomeUI';
 import { AppContext } from '@context';
 import useApi from '@hooks/useApi';
@@ -22,8 +23,6 @@ const Home = () => {
   const {
     setUser,
     setUserWorkspaces,
-    user,
-    userWorkspaces,
     setSelectedWorkspace,
     selectedWorkspace,
   } = useContext(AppContext);
@@ -36,7 +35,7 @@ const Home = () => {
 
   const workspaceResponse = useApi({
     url: `workspace/${selectedWorkspace ? selectedWorkspace.id + '/' : ''}`,
-    method: 'GET',
+    method: selectedWorkspace ? 'GET' : '',
     token,
   });
 
@@ -46,8 +45,6 @@ const Home = () => {
 
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
-
-  const [, updateState] = React.useState();
 
   useEffect(() => {
     setUser(userResponse.response?.data.user);
@@ -140,10 +137,10 @@ const Home = () => {
 
   const [itemDragged, setItemDragged] = useState(null);
 
-  const dndTodoItemResponse = useApi({
+  useApi({
     token,
     url: `todo/${itemDragged?.id ? itemDragged.id + '/' : ''}`,
-    body: itemDragged,
+    body: itemDragged?.id && itemDragged,
     method: itemDragged?.id && 'PATCH',
   });
 
@@ -182,9 +179,15 @@ const Home = () => {
     setCreateTODOBody({ workspace: selectedWorkspace.id });
   };
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     if (createTODOResponse.response) {
-      setFilteredTODOs([...filteredTOODs, {...createTODOResponse.response.data}]);
+      setFilteredTODOs([
+        ...filteredTOODs,
+        { ...createTODOResponse.response.data },
+      ]);
+      setSearchParams({ TODO: createTODOResponse.response.data.id });
     }
   }, [createTODOResponse.response]);
 

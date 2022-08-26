@@ -3,7 +3,12 @@ import { TextAreaStyles } from './TextAreaStyles';
 
 const TextArea = ({ value, handleChange, name, sx }) => {
   return (
-    <TextAreaStyles value={value} onChange={handleChange} name={name} {...sx} />
+    <TextAreaStyles
+      value={value}
+      onChange={handleChange}
+      name={name}
+      {...sx}
+    />
   );
 };
 

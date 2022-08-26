@@ -5,7 +5,6 @@ const CheckBox = ({ sx, value, name, handleChange, checked }) => {
   return (
     <CheckBoxStyles
       {...sx}
-      value={value}
       name={name}
       onChange={handleChange}
       type="checkbox"

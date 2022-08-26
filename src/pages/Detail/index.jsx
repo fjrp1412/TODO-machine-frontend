@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { DetailStyles } from './DetailStyles';
 import { TextArea } from '@components/Inputs/TextArea';
 import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
@@ -9,34 +9,92 @@ import useApi from '@hooks/useApi';
 
 const TODODetail = () => {
   const { id } = useParams();
-  const [token, setToken] = useState(JSON.parse(window.localStorage.getItem('token')));
-  const TODOresponse = useApi({
-    url: `todo/${id}/`,
-    method: 'GET',
-    token
-  })
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [TODOUrlParam, setTODOUrlParam] = useState(null);
   const [TODO, setTODO] = useState({});
+  const [stopGet, setStopGet] = useState(false);
+  const [editableTODO, setEditableTODO] = useState({});
+
+  const options = [
+    { value: 'Low', label: 'Low' },
+    { value: 'Medium', label: 'Medium' },
+    { value: 'High', label: 'High' },
+  ];
 
   useEffect(() => {
-    if (!TODOresponse.loading) {
-      setTODO(TODOresponse.response.data);
+    setTODOUrlParam(searchParams.get('TODO'));
+  }, [searchParams]);
+
+  const [token, setToken] = useState(
+    JSON.parse(window.localStorage.getItem('token'))
+  );
+  const TODOresponse = useApi({
+    url: `todo/${id ? id : TODOUrlParam}/`,
+    method: (id || TODOUrlParam) && !stopGet && 'GET',
+    token,
+  });
+
+  const TODOUpdateResponse = useApi({
+    url: `todo/${id ? id : TODOUrlParam}/`,
+    method: (id || TODOUrlParam) && 'PATCH',
+    body: TODO,
+    token,
+  });
+
+  useEffect(() => {
+    console.log(TODOresponse);
+    if (!TODOresponse.loading && TODOresponse.response?.data && !stopGet) {
+      console.log('entre');
+      setEditableTODO(TODOresponse.response?.data);
+      setStopGet(true);
     }
   }, [TODOresponse]);
 
   useEffect(() => {
     return () => {
-      console.log('sali')
+      if (!id) {
+        setSearchParams({}, { replace: true });
+      }
+    };
+  }, []);
+
+  const handleChange = (key, e) => {
+
+    if (key === 'completed') {
+      console.log('check', e.target.checked);
+      setEditableTODO(previous => {
+        return { ...previous, [key]: e.target.checked, 'status': 'finished' };
+      });
+    } else {
+      setEditableTODO(previous => {
+        return { ...previous, [key]: e.target.value };
+      });
     }
-  }, [])
+  };
+
+  const handleChangeSelect = (key, value) => {
+    setEditableTODO(previous => {
+      return { ...previous, [key]: value.toLowerCase() };
+    });
+  };
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setTODO(editableTODO);
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [editableTODO]);
+
   return (
     <DetailStyles>
       <div className="form-container">
         <div className="form-container__head">
           <div className="form-todo-title field">
             <TextArea
-              value={TODO?.title || 'Un titulo con mucho texto'}
-              handleChange={e => console.log(e.target.value)}
+              value={editableTODO?.title}
+              handleChange={e => handleChange('title', e)}
+              name="title"
             ></TextArea>
           </div>
 
@@ -51,23 +109,29 @@ const TODODetail = () => {
               Completed
             </Label>
             <CheckBox
-              value={TODO?.completed || false}
-              handleChange={e => console.log(e.target.value)}
+              value={editableTODO?.completed || false}
+              handleChange={e => handleChange('completed', e)}
               name="completed"
-              checked={TODO?.completed || false}
+              checked={editableTODO?.completed}
             />
           </div>
 
           <div className="form-todo__priority field">
-            <SimpleSelect />
+            <SimpleSelect
+              options={options}
+              handleChange={choice =>
+                handleChangeSelect('priority', choice.value)
+              }
+              value={editableTODO?.priority}
+            />
           </div>
         </div>
 
         <div className="form-todo__description field">
           <TextArea
             name="description"
-            value={TODO?.description || 'Description'}
-            handleChange={e => console.log(e.target.value)}
+            value={editableTODO?.description}
+            handleChange={e => handleChange('description', e)}
             sx={{
               height: '100%',
               fontSize: '1.6rem',

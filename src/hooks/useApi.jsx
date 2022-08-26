@@ -33,7 +33,7 @@ export default function useApi({ url, method, body, token }) {
           setLoading(false);
           setErrors(null);
 
-          console.log('response POST method', response);
+          //console.log('response POST method', response);
         } catch (e) {
           setResponse(null);
           setLoading(false);
@@ -63,7 +63,7 @@ export default function useApi({ url, method, body, token }) {
           setResponse(response);
           setLoading(false);
           setErrors(null);
-          //console.log('response PATCH method', response);
+          console.log('response PATCH method', response);
         } catch (e) {
           setResponse(null);
           setLoading(false);
