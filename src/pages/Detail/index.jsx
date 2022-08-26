@@ -5,60 +5,32 @@ import { TextArea } from '@components/Inputs/TextArea';
 import { CheckBox } from '@components/Inputs/CheckBox/CheckBox';
 import { SimpleSelect } from '@components/Inputs/Selects';
 import { Label } from '@components/Label';
+import useApi from '@hooks/useApi';
 
 const TODODetail = () => {
   const { id } = useParams();
-  const TODOItemsTest = [
-    {
-      id: 1,
-      title: 'Todo 1',
-      priority: 'Low',
-      status: 'pending',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Todo 2',
-      priority: 'Low',
-      status: 'pending',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Todo 3',
-      priority: 'Medium',
-      status: 'doing',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'Todo 4',
-      priority: 'Medium',
-      status: 'doing',
-      completed: false,
-    },
-    {
-      id: 5,
-      title: 'Todo 5',
-      priority: 'High',
-      status: 'finished',
-      completed: true,
-    },
-    {
-      id: 6,
-      title: 'Todo 6',
-      priority: 'High',
-      status: 'finished',
-      completed: true,
-    },
-  ];
+  const [token, setToken] = useState(JSON.parse(window.localStorage.getItem('token')));
+  const TODOresponse = useApi({
+    url: `todo/${id}/`,
+    method: 'GET',
+    token
+  })
+
   const [TODO, setTODO] = useState({});
+
   useEffect(() => {
     console.log('id', id);
-    if (id) {
-      setTODO(TODOItemsTest.filter(item => parseInt(id) === item.id)[0]);
+    if (!TODOresponse.loading) {
+      console.log('TODO response', TODOresponse)
+      setTODO(TODOresponse.response.data);
     }
-  }, [id]);
+  }, [TODOresponse]);
+
+  useEffect(() => {
+    return () => {
+      console.log('sali')
+    }
+  }, [])
   console.log('TODO', TODO)
   return (
     <DetailStyles>
@@ -66,7 +38,7 @@ const TODODetail = () => {
         <div className="form-container__head">
           <div className="form-todo-title field">
             <TextArea
-              value={TODO.title || 'Un titulo con mucho texto'}
+              value={TODO?.title || 'Un titulo con mucho texto'}
               handleChange={e => console.log(e.target.value)}
             ></TextArea>
           </div>
@@ -82,10 +54,10 @@ const TODODetail = () => {
               Completed
             </Label>
             <CheckBox
-              value={TODO.completed || false}
+              value={TODO?.completed || false}
               handleChange={e => console.log(e.target.value)}
               name="completed"
-              checked={TODO.completed || false}
+              checked={TODO?.completed || false}
             />
           </div>
 
@@ -97,7 +69,7 @@ const TODODetail = () => {
         <div className="form-todo__description field">
           <TextArea
             name="description"
-            value={TODO.description || 'Description'}
+            value={TODO?.description || 'Description'}
             handleChange={e => console.log(e.target.value)}
             sx={{
               height: '100%',

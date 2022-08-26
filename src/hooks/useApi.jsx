@@ -45,7 +45,7 @@ export default function useApi({ url, method, body, token }) {
         setResponse(response);
         setLoading(false);
         setErrors(null);
-        //console.log('response GET method', response);
+        console.log('response GET method', response);
       } else if (method === TYPES.PATCH) {
         if (body) {
           const response = await axiosInstance({
@@ -59,7 +59,7 @@ export default function useApi({ url, method, body, token }) {
           setResponse(response);
           setLoading(false);
           setErrors(null);
-          console.log('response PATCH method', response);
+          //console.log('response PATCH method', response);
         }
       }
     })();
