@@ -2,7 +2,13 @@ import React from 'react';
 import { SidebarStyles } from './SidebarStyles';
 import UserDefaultImg from '@assets/user-default.png';
 
-const SidebarUI = ({ items, handleItemSelect, selected }) => {
+const SidebarUI = ({
+  items,
+  handleItemSelect,
+  selected,
+  selectedWorkspace,
+  user,
+}) => {
   return (
     <SidebarStyles>
       <nav className="sidebar">
@@ -11,8 +17,10 @@ const SidebarUI = ({ items, handleItemSelect, selected }) => {
             <img src={UserDefaultImg} alt="user" className="img" />
           </div>
           <div className="sidebar-header__description">
-            <span className="sidebar-header__username">Francisco Ruiz</span>
-            <span className="sidebar-header__workspace">Workspace</span>
+            <span className="sidebar-header__username">{user?.email}</span>
+            <span className="sidebar-header__workspace">
+              {selectedWorkspace?.title}
+            </span>
           </div>
         </div>
 
