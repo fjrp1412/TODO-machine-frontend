@@ -3,8 +3,8 @@ import { SidebarUI } from './SidebarUI';
 
 const Sidebar = ({ items, selected, setSelected }) => {
 
-  const handleItemSelect = id => {
-    setSelected(id);
+  const handleItemSelect = item => {
+    setSelected(item);
   };
   return (
     <SidebarUI

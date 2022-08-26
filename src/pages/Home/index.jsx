@@ -35,7 +35,7 @@ const Home = () => {
   });
 
   const workspaceResponse = useApi({
-    url: `workspace/${selectedWorkspace ? selectedWorkspace + '/' : ''}`,
+    url: `workspace/${selectedWorkspace ? selectedWorkspace.id + '/' : ''}`,
     method: 'GET',
     token,
   });
@@ -51,7 +51,7 @@ const Home = () => {
     setUser(userResponse.response?.data.user);
     setUserWorkspaces(userResponse.response?.data.workspaces);
     if (!selectedWorkspace) {
-      setSelectedWorkspace(userResponse.response?.data.workspaces[0].id);
+      setSelectedWorkspace(userResponse.response?.data.workspaces[0]);
     }
   }, [userResponse]);
 
@@ -109,12 +109,11 @@ const Home = () => {
     setTODOItems(previous => previous.filter(item => item.id !== id));
   };
 
-
-/**
- * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
- * toggling the item's completed property and setting the item's status to either 'finished' or
- * 'pending' depending on the item's completed property
- */
+  /**
+   * We're mapping over the TODOItems array, and if the item's id matches the id passed in, we're
+   * toggling the item's completed property and setting the item's status to either 'finished' or
+   * 'pending' depending on the item's completed property
+   */
   const handleToggleCompleted = id => {
     setTODOItems(
       TODOItems.map(item => {
@@ -129,7 +128,6 @@ const Home = () => {
     );
   };
 
-
   const [itemDragged, setItemDragged] = useState(null);
 
   const dndTodoItemResponse = useApi({
@@ -139,21 +137,20 @@ const Home = () => {
     method: 'PATCH',
   });
 
-
-/**
- * It takes an id and a status as parameters, and if the status sended is different from the status of the item,
- * it maps through the todo items and sets the status of the item with the matching id to the status passed in.
- * 
- * Also, set the ItemDragged for update state in useApi hook to send PATCH method to the api on the purpose of update
- * the status and completed attributes of the item
- * 
- */
+  /**
+   * It takes an id and a status as parameters, and if the status sended is different from the status of the item,
+   * it maps through the todo items and sets the status of the item with the matching id to the status passed in.
+   *
+   * Also, set the ItemDragged for update state in useApi hook to send PATCH method to the api on the purpose of update
+   * the status and completed attributes of the item
+   *
+   */
   const handleDrop = (id, status) => {
     if (status) {
       setTODOItems(previous =>
         previous.map(item => {
           if (item.id === id && item.status !== status) {
-            console.log('entre')
+            console.log('entre');
             item.status = status;
             item.completed = status === 'finished';
             console.log('item', item);
@@ -167,15 +164,15 @@ const Home = () => {
 
   /* Setting the pendings, doings and finisheds to the filteredTODOs every time filteredTODOs change. */
   useEffect(() => {
-      setPendings(
-        filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
-      );
-      setDoings(
-        filteredTOODs?.filter(item => item.status.toLowerCase() === 'doing')
-      );
-      setFinisheds(
-        filteredTOODs?.filter(item => item.status.toLowerCase() === 'finished')
-      );
+    setPendings(
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'pending')
+    );
+    setDoings(
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'doing')
+    );
+    setFinisheds(
+      filteredTOODs?.filter(item => item.status.toLowerCase() === 'finished')
+    );
   }, [filteredTOODs]);
 
   return (
@@ -192,6 +189,7 @@ const Home = () => {
       onCloseModal={() => setOpen(false)}
       screenSize={screenSize}
       handleDrop={handleDrop}
+      workspace={selectedWorkspace}
     />
   );
 };

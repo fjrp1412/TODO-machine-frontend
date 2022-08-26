@@ -22,6 +22,7 @@ const HomeUI = ({
   onCloseModal,
   screenSize,
   handleDrop,
+  workspace,
 }) => {
   return (
     <HomeStyles>
@@ -29,13 +30,10 @@ const HomeUI = ({
         <div className="content-info">
           <div className="content-info__container">
             <div className="content-info__title">
-              <h1>Workspace</h1>
+              <h1>{workspace?.title}</h1>
             </div>
             <div className="content-info__description">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas
-              officia repudiandae molestiae nulla amet quaerat, pariatur
-              architecto? Dicta cum numquam vitae placeat error eum quod enim
-              dolore. Eius, doloribus accusantium?
+              {workspace?.description}
             </div>
           </div>
         </div>
