@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { SidebarUI } from './SidebarUI';
 
 const Sidebar = ({ items, selected, setSelected }) => {
+  const navigate = useNavigate();
+  const { id } = useParams() 
 
   const handleItemSelect = item => {
     setSelected(item);
+    if(id) {
+      navigate('/', {replace: true})
+    }
   };
   return (
     <SidebarUI
