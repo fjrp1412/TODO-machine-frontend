@@ -35,7 +35,7 @@ const Home = () => {
 
   const workspaceResponse = useApi({
     url: `workspace/${selectedWorkspace ? selectedWorkspace.id + '/' : ''}`,
-    method: selectedWorkspace ? 'GET' : '',
+    method: 'GET',
     token,
   });
 
@@ -48,14 +48,14 @@ const Home = () => {
 
   useEffect(() => {
     setUser(userResponse.response?.data.user);
-    setUserWorkspaces(userResponse.response?.data.workspaces);
-    if (!selectedWorkspace) {
-      setSelectedWorkspace(userResponse.response?.data.workspaces[0]);
-    }
   }, [userResponse]);
 
   useEffect(() => {
     setTODOItems(workspaceResponse.response?.data.TODOs);
+    if (!selectedWorkspace) {
+      setUserWorkspaces(workspaceResponse.response?.data);
+      setSelectedWorkspace(workspaceResponse.response?.data[0]);
+    }
   }, [workspaceResponse]);
 
   /*

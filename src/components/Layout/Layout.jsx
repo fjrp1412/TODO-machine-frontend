@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Sidebar } from '@components/Sidebar';
 import { LayoutStyles } from './LayoutStyles';
-import { AppContext } from '@context/AppContext';
 
 const Layout = ({ children }) => {
-  const { userWorkspaces, selectedWorkspace, setSelectedWorkspace } =
-    useContext(AppContext);
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   window.addEventListener('resize', () => {
     setScreenSize(window.innerWidth);
@@ -14,11 +11,7 @@ const Layout = ({ children }) => {
     <LayoutStyles>
       <div className="layout">
         <div className={`sidebar ${screenSize <= 710 ? 'hide' : ''}`}>
-          <Sidebar
-            items={userWorkspaces}
-            selected={selectedWorkspace}
-            setSelected={setSelectedWorkspace}
-          ></Sidebar>
+          <Sidebar></Sidebar>
         </div>
 
         <div className="content">{children}</div>

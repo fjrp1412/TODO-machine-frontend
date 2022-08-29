@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ArrowIcon from '@assets/open-diagonal-arrow.png';
 
 const SidebarStyles = styled.div`
   background-color: var(--black-variant);
@@ -74,6 +73,23 @@ const SidebarStyles = styled.div`
     align-items: center;
     font-size: 1.6rem;
   }
+
+  .sidebar-footer {
+    display: flex;
+    height: 50px;
+    width: calc(100% - 20px);
+    font-size: 1.4rem;
+    align-items: center;
+    border-top: solid 1px #7b7b7b;
+    margin: 0px 0px 10px 0px;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .sidebar-footer:hover {
+    background-color: #7b7b7b;
+  }
+
 
   .sidebar-content__container .sidebar-content__item:hover {
     background-color: rgba(43, 36, 121, 0.5);

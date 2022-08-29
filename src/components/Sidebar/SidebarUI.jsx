@@ -8,6 +8,7 @@ const SidebarUI = ({
   selected,
   selectedWorkspace,
   user,
+  handleAddWorkspace,
 }) => {
   return (
     <SidebarStyles>
@@ -38,6 +39,12 @@ const SidebarUI = ({
                   <span>{item.title}</span>
                 </div>
               ))}
+          </div>
+        </div>
+
+        <div className="sidebar-footer" onClick={handleAddWorkspace}>
+          <div className="sidebar-footer__content">
+            <span>Create new Workspace</span>
           </div>
         </div>
       </nav>
