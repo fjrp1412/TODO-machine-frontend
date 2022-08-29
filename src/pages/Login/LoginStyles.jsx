@@ -38,6 +38,18 @@ const LoginStyles = styled.div`
     font-weight: bold;
     color: red;
   }
+  .footer-form {
+    margin-top: 10px;
+  }
+
+  .footer-form__link {
+    color: white;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+    font-size: 1.4rem;
+    text-decoration: none;
+    cursor: pointer;
+  }
 `;
 
 export { LoginStyles };

@@ -3,13 +3,13 @@ import styled from 'styled-components';
 const SignupStyles = styled.div`
   display: flex;
   width: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   color: white;
   background-color: var(--light-gray-bg);
 
-  .signup-form {
+  .login-form {
     width: 730px;
     height: 580px;
     display: flex;
@@ -20,6 +20,15 @@ const SignupStyles = styled.div`
     border-radius: 15px;
   }
 
+  .input-container {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0px;
+    padding: 0px 5px;
+  }
+
   .form-title {
     font-size: 4.5rem;
   }
@@ -28,6 +37,19 @@ const SignupStyles = styled.div`
     font-size: 1.4rem;
     font-weight: bold;
     color: red;
+  }
+
+  .footer-form {
+    margin-top: 10px;
+  }
+
+  .footer-form__link {
+    color: white;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+    font-size: 1.4rem;
+    text-decoration: none;
+    cursor: pointer;
   }
 `;
 

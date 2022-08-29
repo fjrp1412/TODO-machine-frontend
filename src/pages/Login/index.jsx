@@ -11,7 +11,7 @@ const Login = () => {
   const [body, setBody] = useState();
   const { response, loading, errors } = useApi({
     url: 'user/token/',
-    method: 'POST',
+    method: body && 'POST',
     body,
   });
 
@@ -19,6 +19,9 @@ const Login = () => {
     if (response?.data.token) {
       window.localStorage.setItem('token', JSON.stringify(response.data.token));
       navigate('/', { replace: true });
+    }
+    else {
+      console.log('errors', errors);
     }
   }, [response]);
 
@@ -38,7 +41,7 @@ const Login = () => {
     },
   });
 
-  return <LoginUI formik={formik} />;
+  return <LoginUI formik={formik} errors={errors}/>;
 };
 
 export default Login;

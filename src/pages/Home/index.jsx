@@ -208,8 +208,6 @@ const Home = () => {
   }, [filteredTOODs]);
 
   const handleUpdateWorkspace = (field, value) => {
-    console.log('field', field);
-    console.log('value', value);
     setEditableWorkspace({ ...editableWorkspace, [field]: value });
   };
 
@@ -217,11 +215,10 @@ const Home = () => {
     const delay = setTimeout(async () => {
       if (editableWorkspace) {
         const response = await PATCH({
-          url: `workspace/${selectedWorkspace.id}/`,
+          url: `workspace/${selectedWorkspace?.id}/`,
           body: editableWorkspace,
           token,
         });
-        console.log('response', response);
         setSelectedWorkspace({ ...response.data });
         setUserWorkspaces(previous => {
           return [
@@ -236,7 +233,6 @@ const Home = () => {
     return () => clearTimeout(delay);
   }, [editableWorkspace]);
 
-  console.log('selected workspace', selectedWorkspace);
 
   return (
     <HomeUI
