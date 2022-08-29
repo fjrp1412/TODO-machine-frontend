@@ -3,6 +3,7 @@ import { Button } from '@components/Button';
 import { Item, ItemContainer } from '@components/TODO';
 import { Modal } from '@components/Modal';
 import { HomeStyles } from './HomeStyles';
+import { TextArea } from '@components/Inputs/TextArea';
 
 const Detail = lazy(() => import('@pages/Detail'));
 const MultiSelect = lazy(() =>
@@ -24,6 +25,7 @@ const HomeUI = ({
   handleDrop,
   workspace,
   handleAddTODO,
+handleUpdateWorkspace,
 }) => {
   return (
     <HomeStyles>
@@ -31,7 +33,11 @@ const HomeUI = ({
         <div className="content-info">
           <div className="content-info__container">
             <div className="content-info__title">
-              <h1>{workspace?.title}</h1>
+              <TextArea
+                value={workspace?.title}
+                name="title"
+                handleChange={(e) => handleUpdateWorkspace('title', e.target.value)}
+              />
             </div>
             <div className="content-info__description">
               {workspace?.description}

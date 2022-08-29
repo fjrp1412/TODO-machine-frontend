@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { HomeUI } from './HomeUI';
 import { AppContext } from '@context';
 import useApi from '@hooks/useApi';
+import { PATCH } from '@utils/api';
 
 const Home = () => {
   const [query, setQuery] = useState({
@@ -45,6 +46,7 @@ const Home = () => {
 
   const [filteredTOODs, setFilteredTODOs] = useState();
   const [open, setOpen] = useState(false);
+  const [editableWorkspace, setEditableWorkspace] = useState(null);
 
   useEffect(() => {
     setUser(userResponse.response?.data.user);
@@ -55,6 +57,7 @@ const Home = () => {
     if (!selectedWorkspace) {
       setUserWorkspaces(workspaceResponse.response?.data);
       setSelectedWorkspace(workspaceResponse.response?.data[0]);
+      setEditableWorkspace(workspaceResponse.response?.data[0]);
     }
   }, [workspaceResponse]);
 
@@ -204,6 +207,37 @@ const Home = () => {
     );
   }, [filteredTOODs]);
 
+  const handleUpdateWorkspace = (field, value) => {
+    console.log('field', field);
+    console.log('value', value);
+    setEditableWorkspace({ ...editableWorkspace, [field]: value });
+  };
+
+  useEffect(() => {
+    const delay = setTimeout(async () => {
+      if (editableWorkspace) {
+        const response = await PATCH({
+          url: `workspace/${selectedWorkspace.id}/`,
+          body: editableWorkspace,
+          token,
+        });
+        console.log('response', response);
+        setSelectedWorkspace({ ...response.data });
+        setUserWorkspaces(previous => {
+          return [
+            ...previous.map(item =>
+              item.id === response.data.id ? response.data : item
+            ),
+          ];
+        });
+      }
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [editableWorkspace]);
+
+  console.log('selected workspace', selectedWorkspace);
+
   return (
     <HomeUI
       query={query}
@@ -218,8 +252,9 @@ const Home = () => {
       onCloseModal={() => setOpen(false)}
       screenSize={screenSize}
       handleDrop={handleDrop}
-      workspace={selectedWorkspace}
+      workspace={editableWorkspace}
       handleAddTODO={handleAddTODO}
+      handleUpdateWorkspace={handleUpdateWorkspace}
     />
   );
 };

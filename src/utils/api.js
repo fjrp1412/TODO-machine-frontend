@@ -21,4 +21,21 @@ const POST = async ({ url, token, body }) => {
   }
 };
 
-export { POST };
+const PATCH = async ({ url, token, body }) => {
+  try {
+    const response = await axiosInstance({
+      url: url,
+      data: body,
+      method: 'PATCH',
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export { POST, PATCH };
