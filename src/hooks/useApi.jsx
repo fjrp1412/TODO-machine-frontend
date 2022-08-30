@@ -17,7 +17,7 @@ export default function useApi({ url, method, body, token }) {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
-  console.log(import.meta.env.API_URL);
+  console.log('apoi url', import.meta.env.API_URL);
   useEffect(() => {
     (async function requestApi() {
       if (method === TYPES.POST) {
