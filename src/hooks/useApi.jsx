@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = import.meta.env.API_URL
-
 const TYPES = {
   POST: 'POST',
   GET: 'GET',
@@ -12,14 +10,14 @@ const TYPES = {
 };
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 export default function useApi({ url, method, body, token }) {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
-  console.log('apoi url', API_URL);
+  console.log('apoi url', import.meta.env.VITE_API_URL);
   useEffect(() => {
     (async function requestApi() {
       if (method === TYPES.POST) {
