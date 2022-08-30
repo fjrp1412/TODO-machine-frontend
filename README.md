@@ -13,10 +13,10 @@ Also, for development you may wanna change DATABASE variable in settings. It is 
 ![main page](./README_img/Main.png)
 
 ## Detail
-![detail page](./README_IMG/Detail.png)
+![detail page](./README_img/Detail.png)
 
 ## Create new TODO
-![create TODO](./README_IMG/create_todo.png)
+![create TODO](./README_img/create_todo.png)
 
 ## Commands
  - npm install --> Install all dependencies
