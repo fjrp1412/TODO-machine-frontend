@@ -10,13 +10,14 @@ const TYPES = {
 };
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === 'production' ? import.meta.env.API_URL : import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.PROD ? import.meta.env.API_URL : import.meta.env.VITE_API_URL,
 });
 
 export default function useApi({ url, method, body, token }) {
   const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState(null);
+  console.log(import.meta.env.API_URL);
   useEffect(() => {
     (async function requestApi() {
       if (method === TYPES.POST) {
